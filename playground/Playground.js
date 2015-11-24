@@ -1,6 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
+const styles = {
+  reset: {
+    WebkitApperance: 'none',
+    marginRight: '12px',
+    border: '1px solid #ff3900',
+    borderRadius: '3px',
+    background: 'rgba(255, 57, 0, .2)',
+    color: '#ff3900',
+    cursor: 'pointer',
+    marginBottom: '20px'
+  }
+};
+
 class Playground extends Component {
   static childContextTypes = {
     store: PropTypes.object
@@ -28,7 +41,7 @@ class Playground extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.reset} style={{marginBottom: '20px'}}>Reset</button>
+        <button onClick={this.reset} style={styles.reset}>Reset</button>
         <div>
           {this.props.children}
         </div>

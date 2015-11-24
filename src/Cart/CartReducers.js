@@ -24,7 +24,7 @@ export default function cart(state = {}, action) {
     try {
       state = {...state, cart: {...JSON.parse(localStorage['cart'])}};
     } catch (err) {
-      state = {...state, cart: {items: []}};
+      state = {...state, cart: {items: [1, 2, 3]}};
     }
     localStorage['cart'] = JSON.stringify(state.cart);
     return state;
