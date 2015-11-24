@@ -1,5 +1,4 @@
-import Logger from '../src/Store/DevStore';
-import { store } from '../src/App';
+import Logger from './ReduxStore';
 import React, { Component, PropTypes } from 'react';
 import HeaderView from './Views/HeaderView';
 import { functionName } from './Helper';
@@ -8,13 +7,17 @@ import StateView from './Views/StateView';
 import ResultView from './Views/ResultView';
 
 class StateComponent extends Component {
+  static contextTypes = {
+    store: PropTypes.object
+  };
+
   static childContextTypes = {
     component: PropTypes.any,
     expanded: PropTypes.bool
   };
 
-  constructor() {
-    super();
+  constructor(props, context, updater) {
+    super(props, context, updater);
     try {
       this.state = JSON.parse(localStorage['component-state-' + functionName(this.constructor)]);
     } catch (err) {
@@ -25,12 +28,19 @@ class StateComponent extends Component {
         error: null
       };
     }
-    store.subscribe(() =>
+    context.store.subscribe(() =>
       this.setState({
         state: this.getReduxState()
       })
     );
     Logger.dispatcherCallbacks = [...Logger.dispatcherCallbacks, this.dispatcherCallback];
+  }
+
+  getChildContext() {
+    return {
+      component: this,
+      expanded: this.state.expanded
+    };
   }
 
   dispatcherCallback = (action) => {
@@ -45,15 +55,8 @@ class StateComponent extends Component {
     localStorage['component-state-' + functionName(this.constructor)] = JSON.stringify(this.state);
   }
 
-  getChildContext() {
-    return {
-      component: this,
-      expanded: this.state.expanded
-    };
-  }
-
   getReduxState() {
-    const states = store.getState();
+    const states = this.context.store.getState();
     const stateName = functionName(this.constructor).replace(/([A-Z])/g, function (g) {
       return `_${g.toLowerCase()}`;
     }).replace(/^_/, '');
@@ -88,7 +91,7 @@ class StateComponent extends Component {
           action={this.state.action}
           state={this.state.state}
         >
-          <RequestView actions={this.constructor.actions}/>
+          <RequestView actions={this.constructor.actions} callbacks={this.constructor.callbacks}/>
         </HeaderView>
         {content}
       </div>

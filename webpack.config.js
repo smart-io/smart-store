@@ -7,7 +7,7 @@ const DEV = process.env['PROD_DEV'] && process.env['PROD_DEV'] != '0' ? true : f
 module.exports = {
   entry: {
     index:  ['webpack/hot/dev-server', './src/App.js'],
-    ...(DEV && {playground: ['webpack/hot/dev-server', './playground/Playground.js']})
+    ...(DEV && {playground: ['webpack/hot/dev-server', './playground/index.js']})
   },
 
   output: {

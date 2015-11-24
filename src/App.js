@@ -1,12 +1,15 @@
 import { combineReducers } from 'redux';
-import { finalCreateStore } from './ReduxStore/Store';
-import { devFinalCreateStore } from './ReduxStore/DevStore';
 import cart from './Cart/CartReducers';
 
-let createStore = process.env.NODE_ENV === 'development' ? devFinalCreateStore : finalCreateStore;
+import { compose, createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
-export const store = createStore(combineReducers({
+export const reducers = combineReducers({
   cart
-}));
+});
+
+export const store = compose(
+  applyMiddleware(thunkMiddleware)
+)(createStore)(reducers);
 
 export const dispatch = store.dispatch;

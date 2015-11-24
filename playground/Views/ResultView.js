@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import JsonViewer from '../Resources/JsonViewer';
+import JsonViewer from '../Ui/JsonViewer';
 
 class StateView extends Component {
   constructor(...args) {

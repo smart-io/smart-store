@@ -25,7 +25,7 @@ class ActionsView extends Component {
     let actions = [];
     for (var prop in this.props.actions) {
       if (this.props.actions.hasOwnProperty(prop)) {
-        actions = [...actions, this.renderAction(prop, this.props.actions[prop])];
+        actions = [...actions, this.renderAction(prop, this.props.actions[prop], this.props.callbacks[prop])];
       }
     }
 
@@ -36,11 +36,11 @@ class ActionsView extends Component {
     );
   }
 
-  renderAction(name, action) {
+  renderAction(name, action, callback) {
     return (
       <button
         key={name}
-        onClick={this.onClick.bind(this, action)}
+        onClick={callback || this.onClick.bind(this, action)}
         style={{
           WebkitApperance: 'none',
           marginRight: '12px',

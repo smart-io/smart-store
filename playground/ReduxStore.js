@@ -27,7 +27,7 @@ const storage = compose(
 export const devFinalCreateStore = compose(
   applyMiddleware(thunkMiddleware, logger),
   devTools(),
-  persistState(storage, 'my-storage-key')
+  persistState(storage, 'redux-playground')
 )(createStore);
 
 export default Logger;

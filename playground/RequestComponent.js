@@ -1,4 +1,4 @@
-import Logger from '../src/ReduxStore/DevStore';
+import Logger from './ReduxStore';
 import React, { Component, PropTypes } from 'react';
 import HeaderView from './Views/HeaderView';
 import { functionName } from './Helper';
@@ -7,6 +7,10 @@ import FieldsView from './Views/FieldsView';
 import ResultView from './Views/ResultView';
 
 class RequestComponent extends Component {
+  static contextTypes = {
+    store: PropTypes.object
+  };
+
   static childContextTypes = {
     component: PropTypes.any,
     expanded: PropTypes.bool
