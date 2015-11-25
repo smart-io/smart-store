@@ -18,7 +18,14 @@ class Order extends Component {
   };
 
   validateOrder = () => {
-    this.context.store.dispatch(OrderActions.convertCartToOrder(this.context.store.getState().cart));
+    this.context.store.dispatch(OrderActions.validateOrder(this.context.store.getState().order))
+      .then(function () {
+        alert('cool');
+      })
+      .catch(function () {
+        alert('not cool');
+      })
+
   };
 
   actions = {

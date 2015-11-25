@@ -7,7 +7,7 @@ const defaults = {
   user_id: null,
   order_number: null,
   status: null,
-  currency: null,
+  currency: 'USD',
   shippingAddress: {...Address},
   billingAddress: {...Address},
   customer: {...Customer},

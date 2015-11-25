@@ -1,3 +1,5 @@
+import OrderValidator from './OrderValidator';
+
 export const UPDATE_ORDER = 'UPDATE_ORDER';
 export function updateOrder(data) {
   return {
@@ -44,4 +46,24 @@ export function changeOrderCard(card) {
     type: CHANGE_ORDER_CARD,
     card: card
   };
+}
+
+export const VALIDATE_ORDER = 'VALIDATE_ORDER';
+export const ORDER_VALIDATED = 'ORDER_VALIDATED';
+export const ORDER_EXCEPTIONS = 'ORDER_EXCEPTIONS';
+const dispatchAction = (action) => { return { type: action }};
+
+export function validateOrder(order) {
+  return function(dispatch) {
+    dispatch(dispatchAction(VALIDATE_ORDER));
+    return new Promise(function(resolve, reject) {
+      if (OrderValidator.assert(order)) {
+        dispatch(dispatchAction(ORDER_VALIDATED));
+        resolve();
+      } else {
+        dispatch(dispatchAction(ORDER_EXCEPTIONS));
+        reject(OrderValidator.validate(order));
+      }
+    });
+  }
 }
