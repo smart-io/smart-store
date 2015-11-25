@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 import { functionName } from './Helper';
-import Logger from './ReduxStore';
 import HeaderView from './Views/HeaderView';
 import Actions from './Ui/Actions';
-import StateView from './Views/StateView';
-import ResultView from './Views/ResultView';
 
 const styles = {
   marginBottom: '20px',

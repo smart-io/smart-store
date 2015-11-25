@@ -1,12 +1,10 @@
-import { Config, reducers } from '../src/index';
+import { Config, reducers, initialState } from '../src/index';
 import React  from 'react';
 import ReactDOM from 'react-dom';
-import { devFinalCreateStore } from '../playground/ReduxStore';
-import Playground from '../playground/Playground';
-import index from '../playground/index';
+import { devFinalCreateStore, Playground } from '../playground/index';
 import Cart from './Components/Cart';
 
-const store = devFinalCreateStore(reducers);
+const store = devFinalCreateStore(reducers, initialState);
 
 ReactDOM.render((
   <Playground store={store} url={(value) => Config.url = value}>

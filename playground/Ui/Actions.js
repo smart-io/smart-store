@@ -1,16 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import Action from './Action';
 
 const styles = {
-  button: {
-    WebkitApperance: 'none',
-    marginRight: '12px',
-    border: '1px solid #a8ff00',
-    borderRadius: '3px',
-    background: 'rgba(168, 255, 0, .2)',
-    color: '#a8ff00',
-    cursor: 'pointer'
-  },
-
   span: {
     fontSize: '11px',
     textTransform: 'uppercase',
@@ -58,22 +49,18 @@ class Actions extends Component {
 
   renderAction(name, action) {
     return (
-      <button
-        key={name}
-        onClick={this.action.bind(this, action)}
-        style={styles.button}
-      >
-        {name}
-      </button>
+      <Action key={name} name={name}
+        action={this.action.bind(this, action)}
+      />
     );
   }
 
   action = (action) => {
-    console.log('hgi');
+    action();
   };
 
-  onClick(action) {
-    this.context.component.setState({
+  onClick() {
+    /*this.context.component.setState({
       loading: true,
       error: null,
       actionResult: null
@@ -81,7 +68,7 @@ class Actions extends Component {
 
     dispatch(action(this.getData()))
       .then(this.onSuccess)
-      .catch(this.onError)
+      .catch(this.onError)*/
   }
 
   onSuccess = (action) => {

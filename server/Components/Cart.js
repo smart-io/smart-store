@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react';
-import Item from '../../playground/Item';
-import { dispatch } from '../../src/App';
-import * as actions from '../../src/Cart/CartActions';
+import { View, Section } from '../../playground/index';
+import { Cart as actions } from '../../src/index';
+import Item from '../../src/Item/Item';
 
-@Item
+@View
 class Cart extends Component {
   static contextTypes = {
     store: PropTypes.object
@@ -13,30 +13,47 @@ class Cart extends Component {
 
   constructor(...args) {
     super(...args);
+    this.state = {
+      state: {items: []}
+    };
   }
 
   addCartItem = () => {
-    alert('hi');
-    console.log(this.context.store);
-    /*
-     const id = Math.round(Math.random() * 100);
-     dispatch(actions.addCartItem({
-     id: id,
-     name: `Item ${id}`
-     }));
-     */
+    const id = Math.round(Math.random() * 100);
+    this.context.store.dispatch(actions.addCartItem({
+      ...Item,
+      id: id,
+      name: `Item ${id}`,
+      price: 300.00
+    }));
+  };
+
+  removeCartItem = (index) => {
+    if (index === undefined) {
+      index = prompt('Cart item index');
+    }
+    this.context.store.dispatch(actions.removeCartItem(index));
+  };
+
+  changeCartItemQuantity = (index) => {
+    const quantity = prompt('New quantity');
+    this.context.store.dispatch(actions.changeCartItemQuantity(index, quantity));
   };
 
   actions = {
-    addCartItem: this.addCartItem,
-    changeCartItemQuantity: actions.changeCartItemQuantity,
-    removeCartItem: actions.removeCartItem
+    addCartItem: this.addCartItem
   };
 
   render() {
-    console.log(this.state);
     return (
-      <div>Hello</div>
+      <div>
+        <Section.Items
+          showTotals={['quantity', 'price', 'subtotal']}
+          items={this.state.state.items}
+          removeCartItem={this.removeCartItem}
+          changeCartItemQuantity={this.changeCartItemQuantity}
+        />
+      </div>
     );
   }
 }
