@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import { store } from './App';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -21,32 +20,28 @@ function parseJSON(response) {
   return response.json()
 }
 
-export default function(url, options) {
-  return new Promise(function(resolve, reject) {
-    const session = store.getState().session;
-    if (session.id) {
-      if (!options) {
-        options = {};
+export default class Request {
+  constructor(request) {
+    return new Promise(function(resolve, reject) {
+      let { url, ...options } = request;
+      if (options.data) {
+        options.body = JSON.stringify(options.data);
+        delete options.data;
       }
-      options.headers = {
-        ...options.headers,
-        'X-Session': session.id
-      };
-    }
-
-    return fetch(url, options)
-      .then(checkStatus)
-      .then(parseJSON).then(function (data) {
-        resolve(data);
-      })
-      .catch(function (data) {
-        try {
-          parseJSON(data).then(function (data) {
-            reject(data);
-          });
-        } catch (err) {
-          reject(err);
-        }
-      });
-  });
+      return fetch(url, options)
+        .then(checkStatus)
+        .then(parseJSON).then(function (data) {
+          resolve(data);
+        })
+        .catch(function (data) {
+          try {
+            parseJSON(data).then(function (data) {
+              reject(data);
+            });
+          } catch (err) {
+            reject(err);
+          }
+        });
+    });
+  }
 }

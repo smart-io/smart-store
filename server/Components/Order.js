@@ -19,23 +19,41 @@ class Order extends Component {
 
   validateOrder = () => {
     this.context.store.dispatch(OrderActions.validateOrder(this.context.store.getState().order))
-      .then(function () {
-        alert('cool');
-      })
-      .catch(function () {
-        alert('not cool');
-      })
+      .then(() => { this.setState({ validMessage: 'Order is valid', errors: null })})
+      .catch((errors) => { this.setState({ validMessage: null, errors: errors })})
+  };
 
+  placeOrder = () => {
+    this.context.store.dispatch(OrderActions.placeOrder(this.context.store.getState().order))
+      .then(function () { console.log('ok'); })
+      .catch(function () { console.log('not ok'); })
   };
 
   actions = {
     convertCartToOrder: this.convertCartToOrder,
-    validateOrder: this.validateOrder
+    validateOrder: this.validateOrder,
+    placeOrder: this.placeOrder
   };
 
   render() {
+    let messages;
+    if (this.state.validMessage) {
+      messages = (
+        <Section>
+          <Section.Message message={this.state.validMessage}/>
+        </Section>
+      );
+    } else if (this.state.errors) {
+      messages = (
+        <Section>
+          <Section.Errors errors={this.state.errors}/>
+        </Section>
+      );
+    }
+
     return (
       <View>
+        {messages}
         <Section>
           <Section.Items
             showTotals={['quantity', 'price', 'subtotal']}

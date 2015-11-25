@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { PlaygroundComponent, View, Section } from '../../playground/index';
+import { PlaygroundComponent, View, Section, Ui } from '../../playground/index';
 import { Cart as actions } from '../../src/index';
 import Item from '../../src/Item/Item';
 
@@ -18,14 +18,13 @@ class Cart extends Component {
     };
   }
 
-  addCartItem = () => {
-    const id = Math.round(Math.random() * 100);
-    this.context.store.dispatch(actions.addCartItem({
-      ...Item,
-      id: id,
-      name: `Item ${id}`,
-      price: 300.00
-    }));
+  showCartItemModal = () => {
+    this.refs.modal.setState({ isOpen: true });
+  };
+
+  addCartItem = (value) => {
+    this.refs.modal.setState({ isOpen: false });
+    this.context.store.dispatch(actions.addCartItem({...Item, ...value}));
   };
 
   removeCartItem = (index) => {
@@ -45,7 +44,7 @@ class Cart extends Component {
   };
 
   actions = {
-    addCartItem: this.addCartItem,
+    addCartItem: this.showCartItemModal,
     emptyCart: this.emptyCart
   };
 
@@ -58,6 +57,13 @@ class Cart extends Component {
           removeCartItem={this.removeCartItem}
           changeCartItemQuantity={this.changeCartItemQuantity}
         />
+        <Ui.Modal ref="modal">
+          <Section.Form
+            name="Item"
+            defaults={{...Item}}
+            action={this.addCartItem}
+          />
+        </Ui.Modal>
       </View>
     );
   }

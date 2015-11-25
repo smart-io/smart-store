@@ -1,4 +1,6 @@
 import OrderValidator from './OrderValidator';
+import Config from '../Config';
+import Request from '../Request';
 
 export const UPDATE_ORDER = 'UPDATE_ORDER';
 export function updateOrder(data) {
@@ -51,6 +53,8 @@ export function changeOrderCard(card) {
 export const VALIDATE_ORDER = 'VALIDATE_ORDER';
 export const ORDER_VALIDATED = 'ORDER_VALIDATED';
 export const ORDER_EXCEPTIONS = 'ORDER_EXCEPTIONS';
+export const REQUEST_CREATE_ORDER = 'REQUEST_CREATE_ORDER';
+export const RECEIVE_CREATED_ORDER = 'RECEIVE_CREATED_ORDER';
 const dispatchAction = (action) => { return { type: action }};
 
 export function validateOrder(order) {
@@ -65,5 +69,25 @@ export function validateOrder(order) {
         reject(OrderValidator.validate(order));
       }
     });
+  }
+}
+
+export function placeOrder(order) {
+  return function(dispatch) {
+    dispatch(dispatchAction(REQUEST_CREATE_ORDER));
+
+    return new Request({
+      url: `${Config.url}/order`,
+      method: 'POST',
+      data: order
+    })
+      .then(function (data) {
+        dispatch(receiveSession(data));
+        return Promise.resolve(data);
+      })
+      .catch(function (data) {
+        dispatch(receiveBadSession(data));
+        return Promise.reject(data);
+      });
   }
 }
