@@ -12,11 +12,15 @@ export default function order(state = {}, action) {
     return state;
 
   case Actions.CHANGE_ORDER_SHIPPING_ADDRESS:
-    state = Order.changeOrderBillingAddress(state, action.address);
+    state = Order.changeOrderShippingAddress(state, action.address);
     return state;
 
   case Actions.CHANGE_ORDER_CUSTOMER:
-    state = Order.changeOrderBillingAddress(state, action.address);
+    state = Order.changeOrderCustomer(state, action.customer);
+    return state;
+
+  case Actions.CHANGE_ORDER_CARD:
+    state = Order.changeOrderCard(state, action.card);
     return state;
 
   default:

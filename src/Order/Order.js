@@ -10,8 +10,31 @@ export function convertCartToOrder(order, cart) {
 }
 
 export function changeOrderBillingAddress(order, address) {
-  console.log(order, address);
-  return order;
+  return {
+    ...order,
+    billingAddress: {...address}
+  };
+}
+
+export function changeOrderShippingAddress(order, address) {
+  return {
+    ...order,
+    shippingAddress: {...address}
+  };
+}
+
+export function changeOrderCustomer(order, customer) {
+  return {
+    ...order,
+    customer: {...customer}
+  };
+}
+
+export function changeOrderCard(order, card) {
+  return {
+    ...order,
+    card: {...card}
+  };
 }
 
 export default {

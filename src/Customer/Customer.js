@@ -1,3 +1,6 @@
 export default {
-  id: null
+  id: null,
+  name: null,
+  email: null,
+  phone: null
 };

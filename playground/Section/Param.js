@@ -4,14 +4,14 @@ const styles = {
   container: {
     marginRight: '12px',
     fontSize: '11px',
-    border: '1px solid #00b4ff',
+    border: '1px solid #D381C3',
     borderRadius: '3px',
     padding: '1px 6px',
-    background: 'rgba(0, 180, 255, .1)'
+    background: 'rgba(211, 129, 195, .1)'
   },
 
   label: {
-    color: '#00b4ff',
+    color: '#D381C3',
     marginRight: '8px'
   },
 
