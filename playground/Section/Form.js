@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class View extends Component {
+class Form extends Component {
   render() {
     return (
       <div>
-        {this.props.children}
+        hello
       </div>
     );
   }
 }
 
-export default View;
+export default Form;

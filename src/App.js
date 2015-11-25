@@ -1,20 +1,22 @@
 import { combineReducers } from 'redux';
 import cart from './Cart/CartReducers';
-import cartDefault from './Cart/Cart';
+import order from './Order/OrderReducers';
+import Cart from './Cart/Cart';
 
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 export const reducers = combineReducers({
-  cart
+  cart,
+  order
 });
 
 let state = {};
 try {
   if (localStorage) state.cart = JSON.parse(localStorage['cart']);
-  else state.cart = cartDefault;
+  else state.cart = {...Cart};
 } catch (e) {
-  state.cart = cartDefault;
+  state.cart = {...Cart};
 }
 
 export const initialState = state;

@@ -21,6 +21,11 @@ const styles = {
   controls: {
     display: 'flex',
     marginBottom: '20px'
+  },
+
+  itemContainer: {
+    borderTop: '1px solid rgba(255, 255, 255, .1)',
+    paddingTop: '20px'
   }
 };
 
@@ -78,7 +83,7 @@ class Playground extends Component {
           <Action color="red" name="Reset" action={this.reset}/>
         </div>
 
-        <div>
+        <div style={styles.itemContainer}>
           {this.props.children}
         </div>
 

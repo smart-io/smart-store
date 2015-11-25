@@ -14,7 +14,7 @@ export function removeItem(cart, index) {
 }
 
 export function changeItemQuantity(cart, index, quantity) {
-  let item = {...cart.items[index], quantity: quantity};
+  let item = {...cart.items[index], quantity: parseInt(quantity)};
   item = calculateSubtotem(item);
 
   return {

@@ -4,28 +4,26 @@ import Action from '../Ui/Action';
 const styles = {
   table: {
     width: '100%',
-    marginTop: '20px',
     borderCollapse: 'collapse',
     borderSpacing: 'none'
   },
 
   theadTd: {
     borderBottom: '1px solid rgba(255, 255, 255, .1)',
-    padding: '8px 0',
+    padding: '8px 12px',
     textTransform: 'uppercase',
     color: 'rgba(255, 255, 255, .3)'
   },
 
   tbodyTd: {
     borderTop: '1px solid rgba(255, 255, 255, .1)',
-    padding: '8px 0'
+    padding: '8px 12px',
   },
 
   tfootTd: {
     borderTop: '1px solid rgba(255, 255, 255, .1)',
-    backgroundColor: 'rgba(255, 255, 255, .05)',
-    padding: '8px 0',
-    fontWeight: 'bold',
+    padding: '8px 12px',
+    fontWeight: '900',
     color: '#00b4ff'
   }
 };
@@ -39,12 +37,14 @@ class Items extends Component {
     const { items, showTotals, ...actions } = this.props;
     let children = [];
 
-    items.forEach((item, index) => {
-      children = [...children, this.renderChild(index, item, actions)];
-    });
+    if (items) {
+      items.forEach((item, index) => {
+        children = [...children, this.renderChild(index, item, actions)];
+      });
+    }
 
     let totals = null;
-    if (showTotals && items.length) {
+    if (showTotals && items && items.length) {
       totals = this.renderTotals(showTotals, items);
     }
 

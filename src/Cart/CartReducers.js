@@ -1,24 +1,29 @@
-import * as actions from './CartActions';
-import { addItem, changeItemQuantity, removeItem } from './Cart';
+import * as Actions from './CartActions';
+import DefaultCart, * as Cart from './Cart';
 
-export default function cart(cart = {}, action) {
+export default function cart(state = {}, action) {
   switch (action.type) {
-  case actions.ADD_CART_ITEM:
-    cart = addItem(cart, action.item);
-    if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(cart);
-    return cart;
+  case Actions.ADD_CART_ITEM:
+    state = Cart.addItem(state, action.item);
+    if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
+    return state;
 
-  case actions.CHANGE_CART_ITEM_QUANTITY:
-    cart = changeItemQuantity(cart, action.item, action.quantity);
-    if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(cart);
-    return cart;
+  case Actions.CHANGE_CART_ITEM_QUANTITY:
+    state = Cart.changeItemQuantity(state, action.item, action.quantity);
+    if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
+    return state;
 
-  case actions.REMOVE_CART_ITEM:
-    cart = removeItem(cart, action.item);
-    if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(cart);
-    return cart;
+  case Actions.REMOVE_CART_ITEM:
+    state = Cart.removeItem(state, action.item);
+    if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
+    return state;
+
+  case Actions.EMPTY_CART:
+    state = {...DefaultCart};
+    if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
+    return state;
 
   default:
-    return cart;
+    return state;
   }
 }

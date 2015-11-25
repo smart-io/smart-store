@@ -24,3 +24,10 @@ export function changeCartItemQuantity(item: Item, quantity: Number) {
     quantity: quantity
   };
 }
+
+export const EMPTY_CART = 'EMPTY_CART';
+export function emptyCart() {
+  return {
+    type: EMPTY_CART
+  };
+}

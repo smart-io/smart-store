@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react';
-import { View, Section } from '../../playground/index';
+import { PlaygroundComponent, View, Section } from '../../playground/index';
 import { Cart as actions } from '../../src/index';
 import Item from '../../src/Item/Item';
 
-@View
+@PlaygroundComponent
 class Cart extends Component {
   static contextTypes = {
     store: PropTypes.object
@@ -40,20 +40,25 @@ class Cart extends Component {
     this.context.store.dispatch(actions.changeCartItemQuantity(index, quantity));
   };
 
+  emptyCart = () => {
+    this.context.store.dispatch(actions.emptyCart());
+  };
+
   actions = {
-    addCartItem: this.addCartItem
+    addCartItem: this.addCartItem,
+    emptyCart: this.emptyCart
   };
 
   render() {
     return (
-      <div>
+      <View>
         <Section.Items
           showTotals={['quantity', 'price', 'subtotal']}
           items={this.state.state.items}
           removeCartItem={this.removeCartItem}
           changeCartItemQuantity={this.changeCartItemQuantity}
         />
-      </div>
+      </View>
     );
   }
 }
