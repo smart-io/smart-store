@@ -1,3 +1,11 @@
+export const UPDATE_ORDER = 'UPDATE_ORDER';
+export function updateOrder(data) {
+  return {
+    type: UPDATE_ORDER,
+    data: data
+  };
+}
+
 export const CONVERT_CART_TO_ORDER = 'CONVERT_CART_TO_ORDER';
 export function convertCartToOrder(cart) {
   return {

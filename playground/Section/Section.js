@@ -6,7 +6,9 @@ import Param from './Param';
 const styles = {
   section: {
     display: 'flex',
-    marginBottom: '14px'
+    flexWrap: 'wrap',
+    marginTop: '22px',
+    marginBottom: '22px'
   }
 };
 

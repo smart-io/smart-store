@@ -3,6 +3,10 @@ import * as Order from './Order';
 
 export default function order(state = {}, action) {
   switch (action.type) {
+  case Actions.UPDATE_ORDER:
+    state = Order.updateOrder(state, action.data);
+    return state;
+
   case Actions.CONVERT_CART_TO_ORDER:
     state = Order.convertCartToOrder(state, action.cart);
     return state;

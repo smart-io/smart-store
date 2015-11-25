@@ -4,6 +4,7 @@ import Action from '../Ui/Action';
 const styles = {
   container: {
     marginRight: '12px',
+    marginBottom: '12px',
     fontSize: '11px',
     border: '1px solid rgba(255, 255, 255, .2)',
     borderRadius: '3px',
@@ -27,7 +28,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, .1)',
     backgroundColor: 'rgba(255, 255, 255, .05)',
     padding: '4px 12px',
-    width: '200px',
+    width: '180px',
     color: '#FC6D24'
   },
   buttonContainer: {
