@@ -11,7 +11,8 @@ export const reducers = combineReducers({
 
 let state = {};
 try {
-  state.cart = JSON.parse(localStorage['cart']);
+  if (localStorage) state.cart = JSON.parse(localStorage['cart']);
+  else state.cart = cartDefault;
 } catch (e) {
   state.cart = cartDefault;
 }
