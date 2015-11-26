@@ -1,31 +1,30 @@
-import Item from '../Item/Item';
-
 export const ADD_CART_ITEM = 'ADD_CART_ITEM';
-export function addCartItem(item: Item) {
+export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
+export const CHANGE_CART_ITEM_QUANTITY = 'CHANGE_CART_ITEM_QUANTITY';
+export const EMPTY_CART = 'EMPTY_CART';
+
+export function addCartItem(item) {
   return {
     type: ADD_CART_ITEM,
     item: item
   };
 }
 
-export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
-export function removeCartItem(item: Item) {
+export function removeCartItem(index) {
   return {
     type: REMOVE_CART_ITEM,
-    item: item
+    index: index
   };
 }
 
-export const CHANGE_CART_ITEM_QUANTITY = 'CHANGE_CART_ITEM_QUANTITY';
-export function changeCartItemQuantity(item: Item, quantity: Number) {
+export function changeCartItemQuantity(index, quantity) {
   return {
     type: CHANGE_CART_ITEM_QUANTITY,
-    item: item,
+    index: index,
     quantity: quantity
   };
 }
 
-export const EMPTY_CART = 'EMPTY_CART';
 export function emptyCart() {
   return {
     type: EMPTY_CART

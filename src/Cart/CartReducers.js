@@ -9,12 +9,12 @@ export default function cart(state = {}, action) {
     return state;
 
   case Actions.CHANGE_CART_ITEM_QUANTITY:
-    state = Cart.changeItemQuantity(state, action.item, action.quantity);
+    state = Cart.changeItemQuantity(state, action.index, action.quantity);
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
     return state;
 
   case Actions.REMOVE_CART_ITEM:
-    state = Cart.removeItem(state, action.item);
+    state = Cart.removeItem(state, action.index);
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
     return state;
 
