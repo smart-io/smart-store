@@ -7,12 +7,12 @@ class OrderValidator extends Validator {
   static validate(order) {
     var errors = {};
 
-    if (!AddressValidator.assert(order.shippingAddress)) {
-      errors.shippingAddress = AddressValidator.validate(order.shippingAddress);
+    if (!AddressValidator.assert(order.shipping_address)) {
+      errors.shipping_address = AddressValidator.validate(order.shipping_address);
     }
 
-    if (!AddressValidator.assert(order.billingAddress)) {
-      errors.billingAddress = AddressValidator.validate(order.billingAddress);
+    if (!AddressValidator.assert(order.billing_address)) {
+      errors.billing_address = AddressValidator.validate(order.billing_address);
     }
 
     if (!CardValidator.assert(order.card)) {

@@ -26,7 +26,7 @@ class Order extends Component {
   placeOrder = () => {
     this.context.store.dispatch(OrderActions.placeOrder(this.context.store.getState().order))
       .then(function () { console.log('ok'); })
-      .catch(function () { console.log('not ok'); })
+      .catch(function (ee) { console.log(ee, 'not ok'); })
   };
 
   actions = {
@@ -79,13 +79,13 @@ class Order extends Component {
           <Section.Form
             name="Shipping Address"
             defaults={Address}
-            state={this.state.state.shippingAddress}
+            state={this.state.state.shipping_address}
             action={(state) => { this.context.store.dispatch(OrderActions.changeOrderShippingAddress(state)) }}
           />
           <Section.Form
             name="Billing Address"
             defaults={Address}
-            state={this.state.state.billingAddress}
+            state={this.state.state.billing_address}
             action={(state) => { this.context.store.dispatch(OrderActions.changeOrderBillingAddress(state)) }}
           />
           <Section.Form

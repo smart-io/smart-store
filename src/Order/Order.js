@@ -8,8 +8,8 @@ const defaults = {
   order_number: null,
   status: null,
   currency: 'USD',
-  shippingAddress: {...Address},
-  billingAddress: {...Address},
+  shipping_address: {...Address},
+  billing_address: {...Address},
   customer: {...Customer},
   card: {...Card},
   items: [],
@@ -51,7 +51,7 @@ export function changeOrderBillingAddress(order, address) {
   return {
     ...defaults,
     ...order,
-    billingAddress: {...Address, ...address}
+    billing_address: {...Address, ...address}
   };
 }
 
@@ -59,7 +59,7 @@ export function changeOrderShippingAddress(order, address) {
   return {
     ...defaults,
     ...order,
-    shippingAddress: {...Address, ...address}
+    shipping_address: {...Address, ...address}
   };
 }
 

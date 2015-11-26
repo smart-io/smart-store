@@ -15,15 +15,15 @@ class CardValidator extends Validator {
       errors.number = 'number';
     }
 
-    if (!validator.isInt(card.expiration_month) || !validator.isLength(card.expiration_month, 1, 2)) {
+    if (!validator.isNumeric(card.expiration_month) || !validator.isLength(card.expiration_month, 1, 2)) {
       errors.expiration_month = 'expiration_month';
     }
 
-    if (!validator.isInt(card.expiration_year) || !validator.isLength(card.expiration_year, 1, 2)) {
+    if (!validator.isNumeric(card.expiration_year) || !validator.isLength(card.expiration_year, 1, 2)) {
       errors.expiration_year = 'expiration_year';
     }
 
-    if (!validator.isInt(card.security_code) || !validator.isLength(card.security_code, 3, 4)) {
+    if (!validator.isNumeric(card.security_code) || !validator.isLength(card.security_code, 3, 4)) {
       errors.security_code = 'security_code';
     }
 

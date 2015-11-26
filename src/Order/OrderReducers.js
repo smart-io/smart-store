@@ -27,6 +27,10 @@ export default function order(state = {}, action) {
     state = Order.changeOrderCard(state, action.card);
     return state;
 
+  case Actions.RECEIVE_CREATED_ORDER:
+    state = Order.updateOrder(state, action.data);
+    return state;
+
   default:
     return state;
   }
