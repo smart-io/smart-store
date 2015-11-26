@@ -1,4 +1,6 @@
+import { store, dispatch } from '../App';
 import Item from '../Item/Item';
+import * as Actions from './CartActions';
 
 class Cart {
   /**
@@ -6,9 +8,29 @@ class Cart {
    */
   items = [];
 
+  constructor(attributes) {
+    if (attributes) {
+      for (const key in Object.keys(attributes)) {
+        this[key] = attributes[key];
+      }
+    }
+  }
+
+  static initialize() {
+    return new Cart(store.getState().cart);
+  }
+
+  addItem(item) {
+    return dispatch(Actions.addCartItem(item));
+  }
+
   static addItem(cart, item) {
     item = { ...new Item, ...Cart.calculateSubtotal(item) };
     return { ...cart, items: [...cart.items, item] };
+  }
+
+  removeItem(index) {
+    return dispatch(Actions.removeCartItem(index));
   }
 
   static removeItem(cart, index) {
@@ -19,6 +41,10 @@ class Cart {
         ...cart.items.slice(index + 1)
       ]
     };
+  }
+
+  changeItemQuantity(index, quantity) {
+    return dispatch(Actions.changeCartItemQuantity(index, quantity));
   }
 
   static changeItemQuantity(cart, index, quantity) {

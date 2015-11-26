@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section, Ui } from '../../playground/index';
-import { Cart as actions } from '../../src/index';
+import * as actions from '../../src/Cart/CartActions';
 import Item from '../../src/Item/Item';
 
 @PlaygroundComponent
@@ -24,7 +24,7 @@ class Cart extends Component {
 
   addCartItem = (value) => {
     this.refs.modal.setState({ isOpen: false });
-    this.context.store.dispatch(actions.addCartItem({...Item, ...value}));
+    this.context.store.dispatch(actions.addCartItem({...new Item, ...value}));
   };
 
   removeCartItem = (index) => {

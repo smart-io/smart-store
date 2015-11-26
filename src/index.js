@@ -1,30 +1,39 @@
-import Config from './Config';
-import { reducers, store, dispatch, initialState } from './App';
-import * as Cart from './Cart/Cart';
-import * as Order from './Order/OrderActions';
+import * as App from './App';
+import Cart from './Cart/Cart';
+import Order from './Order/Order';
 
-export default class {
-  static Config = Config;
-  static reducers = reducers;
-  static store = store;
-  static dispatch = dispatch;
-  static initialState = initialState;
+class Store {
+  static reducers = App.reducers;
+  static store = App.store;
+  static dispatch = App.dispatch;
+  static initialState = App.initialState;
+  static _url;
+
+  static set url(value) {
+    Store._url = value;
+  }
+
+  static get url() {
+    return Store._url;
+  }
 
   /**
    * @return {Cart}
    */
   static get cart() {
-    return new Cart();
+    return Cart.initialize();
   }
 
-  static order = class {
-    update = (data) => { return dispatch(Order.updateOrder(data)); };
-    convertCart = (cart) => { return dispatch(Order.convertCartToOrder(cart)); };
-    changeBillingAddress = (address) => { return dispatch(Order.changeOrderBillingAddress(address)); };
-    changeShippingAddress = (address) => { return dispatch(Order.changeOrderShippingAddress(address)); };
-    changeCustomer = (customer) => { return dispatch(Order.changeOrderCustomer(customer)); };
-    changeCard = (card) => { return dispatch(Order.changeOrderCard(card)); };
-    validate = () => { return dispatch(Order.validateOrder()); };
-    place = () => { return dispatch(Order.placeOrder()); };
-  };
-};
+  /**
+   * @return {Order}
+   */
+  static get order() {
+    return Order.initialize();
+  }
+}
+
+export default Store;
+export const reducers = Store.reducers;
+export const store = Store.store;
+export const dispatch = Store.dispatch;
+export const initialState = Store.initialState;

@@ -1,4 +1,4 @@
-import { Config, reducers, initialState } from '../src/index';
+import Store, { reducers, initialState } from '../src/index';
 import React  from 'react';
 import ReactDOM from 'react-dom';
 import { devFinalCreateStore, Playground } from '../playground/index';
@@ -8,7 +8,7 @@ import Order from './Components/Order';
 const store = devFinalCreateStore(reducers, initialState);
 
 ReactDOM.render((
-  <Playground store={store} url={(value) => Config.url = value}>
+  <Playground store={store} url={(value) => Store.url = value}>
       <Cart/>
       <Order/>
   </Playground>

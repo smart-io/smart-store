@@ -1,6 +1,8 @@
+import { store, dispatch } from '../App';
 import Address from '../Address/Address';
 import Customer from '../Customer/Customer';
 import Card from '../Card/Card';
+import * as Actions from './OrderActions';
 
 class Order {
   /**
@@ -73,6 +75,18 @@ class Order {
    */
   total = 0;
 
+  constructor(attributes) {
+    if (attributes) {
+      for (const key in Object.keys(attributes)) {
+        this[key] = attributes[key];
+      }
+    }
+  }
+
+  static initialize() {
+    return new Order(store.getState().order);
+  }
+
   static calculateAmounts(order) {
     let subtotal = 0;
     order.items.forEach((item) => {
@@ -85,12 +99,20 @@ class Order {
     };
   }
 
-  static updateOrder(order, data) {
+  update(data) {
+    return dispatch(Actions.updateOrder(data));
+  }
+
+  static update(order, data) {
     return {
       ...new Order,
       ...order,
       ...data
     };
+  }
+
+  convertCartToOrder(cart) {
+    return dispatch(Actions.convertCartToOrder(cart));
   }
 
   static convertCartToOrder(order, cart) {
@@ -101,7 +123,11 @@ class Order {
     });
   }
 
-  static changeOrderBillingAddress(order, address) {
+  changeBillingAddress(address) {
+    return dispatch(Actions.changeOrderBillingAddress(address));
+  }
+
+  static changeBillingAddress(order, address) {
     return {
       ...new Order,
       ...order,
@@ -109,7 +135,11 @@ class Order {
     };
   }
 
-  static changeOrderShippingAddress(order, address) {
+  changeShippingAddress(address) {
+    return dispatch(Actions.changeOrderShippingAddress(address));
+  }
+
+  static changeShippingAddress(order, address) {
     return {
       ...new Order,
       ...order,
@@ -117,7 +147,11 @@ class Order {
     };
   }
 
-  static changeOrderCustomer(order, customer) {
+  changeCustomer(customer) {
+    return dispatch(Actions.changeOrderCustomer(address));
+  }
+
+  static changeCustomer(order, customer) {
     return {
       ...new Order,
       ...order,
@@ -125,7 +159,11 @@ class Order {
     };
   }
 
-  static changeOrderCard(order, card) {
+  changeCard(card) {
+    return dispatch(Actions.changeOrderCard(card));
+  }
+
+  static changeCard(order, card) {
     return {
       ...new Order,
       ...order,

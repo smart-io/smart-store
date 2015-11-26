@@ -1,5 +1,5 @@
 import OrderValidator from './OrderValidator';
-import Config from '../Config';
+import Store from '../index';
 import Request from '../Request';
 
 export const UPDATE_ORDER = 'UPDATE_ORDER';
@@ -118,7 +118,7 @@ export function placeOrder() {
     dispatch(requestCreateOrder());
 
     return new Request({
-      url: `${Config.url}/order`,
+      url: `${Store.url}/order`,
       method: 'POST',
       data: getState().order
     })

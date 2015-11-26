@@ -4,7 +4,7 @@ import Order from './Order';
 export default function order(state = {}, action) {
   switch (action.type) {
   case Actions.UPDATE_ORDER:
-    state = Order.updateOrder(state, action.data);
+    state = Order.update(state, action.data);
     return state;
 
   case Actions.CONVERT_CART_TO_ORDER:
@@ -12,23 +12,23 @@ export default function order(state = {}, action) {
     return state;
 
   case Actions.CHANGE_ORDER_BILLING_ADDRESS:
-    state = Order.changeOrderBillingAddress(state, action.address);
+    state = Order.changeBillingAddress(state, action.address);
     return state;
 
   case Actions.CHANGE_ORDER_SHIPPING_ADDRESS:
-    state = Order.changeOrderShippingAddress(state, action.address);
+    state = Order.changeShippingAddress(state, action.address);
     return state;
 
   case Actions.CHANGE_ORDER_CUSTOMER:
-    state = Order.changeOrderCustomer(state, action.customer);
+    state = Order.changeCustomer(state, action.customer);
     return state;
 
   case Actions.CHANGE_ORDER_CARD:
-    state = Order.changeOrderCard(state, action.card);
+    state = Order.changeCard(state, action.card);
     return state;
 
   case Actions.RECEIVE_CREATED_ORDER:
-    state = Order.updateOrder(state, action.data);
+    state = Order.update(state, action.data);
     return state;
 
   default:
