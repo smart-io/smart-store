@@ -1,6 +1,6 @@
 {
   "name": "smart-store",
-  "main": "src/App.js",
+  "main": "src/index.js",
   "version": "0.1.0",
   "dependencies": {
     "isomorphic-fetch": "^2.2.0",

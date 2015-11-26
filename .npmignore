@@ -1,7 +1,10 @@
-/node_modules
-/playground
-/npm-debug.log
-/.idea
+/.babelrc
 /.editorconfig
 /.eslintrc
+/.idea
+/node_modules
+/playground
+/server
 /test
+/npm-debug.log
+/webpack.config.js

@@ -67,7 +67,8 @@ class Order extends Component {
           <Section.Param
             name="user_id"
             value={this.state.state.user_id}
-            onChange={(value) => { this.context.store.dispatch(OrderActions.updateOrder({ user_id: value })) }}/>
+            onChange={(value) => { this.context.store.dispatch(OrderActions.updateOrder({ user_id: value })) }}
+          />
         </Section>
         <Section>
           <Section.Form
