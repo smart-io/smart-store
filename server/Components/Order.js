@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section } from '../../playground/index';
-import { Order as OrderActions } from '../../src/index';
+import * as Actions from '../../src/Order/OrderActions';
 import Address from '../../src/Address/Address';
 import Card from '../../src/Card/Card';
 import Customer from '../../src/Customer/Customer';
@@ -14,17 +14,17 @@ class Order extends Component {
   static subscribe = 'order';
 
   convertCartToOrder = () => {
-    this.context.store.dispatch(OrderActions.convertCartToOrder(this.context.store.getState().cart));
+    this.context.store.dispatch(Actions.convertCartToOrder(this.context.store.getState().cart));
   };
 
   validateOrder = () => {
-    this.context.store.dispatch(OrderActions.validateOrder(this.context.store.getState().order))
+    this.context.store.dispatch(Actions.validateOrder(this.context.store.getState().order))
       .then(() => { this.setState({ validMessage: 'Order is valid', errors: null })})
       .catch((errors) => { this.setState({ validMessage: null, errors: errors })})
   };
 
   placeOrder = () => {
-    this.context.store.dispatch(OrderActions.placeOrder(this.context.store.getState().order))
+    this.context.store.dispatch(Actions.placeOrder(this.context.store.getState().order))
       .then(function () { console.log('ok'); })
       .catch(function (ee) { console.log(ee, 'not ok'); })
   };
@@ -67,7 +67,7 @@ class Order extends Component {
           <Section.Param
             name="user_id"
             value={this.state.state.user_id}
-            onChange={(value) => { this.context.store.dispatch(OrderActions.updateOrder({ user_id: value })) }}
+            onChange={(value) => { this.context.store.dispatch(Actions.updateOrder({ user_id: value })) }}
           />
         </Section>
         <Section>
@@ -75,25 +75,25 @@ class Order extends Component {
             name="Customer"
             defaults={new Customer}
             state={this.state.state.customer}
-            action={(state) => { this.context.store.dispatch(OrderActions.changeOrderCustomer(state)) }}
+            action={(state) => { this.context.store.dispatch(Actions.changeOrderCustomer(state)) }}
           />
           <Section.Form
             name="Shipping Address"
             defaults={new Address}
             state={this.state.state.shipping_address}
-            action={(state) => { this.context.store.dispatch(OrderActions.changeOrderShippingAddress(state)) }}
+            action={(state) => { this.context.store.dispatch(Actions.changeOrderShippingAddress(state)) }}
           />
           <Section.Form
             name="Billing Address"
             defaults={new Address}
             state={this.state.state.billing_address}
-            action={(state) => { this.context.store.dispatch(OrderActions.changeOrderBillingAddress(state)) }}
+            action={(state) => { this.context.store.dispatch(Actions.changeOrderBillingAddress(state)) }}
           />
           <Section.Form
             name="Credit Card"
             defaults={new Card}
             state={this.state.state.card}
-            action={(state) => { this.context.store.dispatch(OrderActions.changeOrderCard(state)) }}
+            action={(state) => { this.context.store.dispatch(Actions.changeOrderCard(state)) }}
           />
         </Section>
       </View>

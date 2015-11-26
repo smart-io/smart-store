@@ -148,7 +148,7 @@ class Order {
   }
 
   changeCustomer(customer) {
-    return dispatch(Actions.changeOrderCustomer(address));
+    return dispatch(Actions.changeOrderCustomer(customer));
   }
 
   static changeCustomer(order, customer) {
@@ -169,6 +169,14 @@ class Order {
       ...order,
       card: { ...new Card, ...card }
     };
+  }
+
+  validate() {
+    return dispatch(Actions.validateOrder());
+  }
+
+  place() {
+    return dispatch(Actions.placeOrder());
   }
 }
 
