@@ -77,7 +77,7 @@ class Order {
 
   constructor(attributes) {
     if (attributes) {
-      for (const key in Object.keys(attributes)) {
+      for (const key of Object.keys(attributes)) {
         this[key] = attributes[key];
       }
     }
