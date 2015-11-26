@@ -1,3 +1,5 @@
-export default {
-  id: null
-};
+class Tax {
+  id = null;
+}
+
+export default Tax;

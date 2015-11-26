@@ -73,25 +73,25 @@ class Order extends Component {
         <Section>
           <Section.Form
             name="Customer"
-            defaults={Customer}
+            defaults={new Customer}
             state={this.state.state.customer}
             action={(state) => { this.context.store.dispatch(OrderActions.changeOrderCustomer(state)) }}
           />
           <Section.Form
             name="Shipping Address"
-            defaults={Address}
+            defaults={new Address}
             state={this.state.state.shipping_address}
             action={(state) => { this.context.store.dispatch(OrderActions.changeOrderShippingAddress(state)) }}
           />
           <Section.Form
             name="Billing Address"
-            defaults={Address}
+            defaults={new Address}
             state={this.state.state.billing_address}
             action={(state) => { this.context.store.dispatch(OrderActions.changeOrderBillingAddress(state)) }}
           />
           <Section.Form
             name="Credit Card"
-            defaults={Card}
+            defaults={new Card}
             state={this.state.state.card}
             action={(state) => { this.context.store.dispatch(OrderActions.changeOrderCard(state)) }}
           />

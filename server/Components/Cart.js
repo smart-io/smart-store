@@ -60,7 +60,7 @@ class Cart extends Component {
         <Ui.Modal ref="modal">
           <Section.Form
             name="Item"
-            defaults={{...Item}}
+            defaults={new Item}
             action={this.addCartItem}
           />
         </Ui.Modal>

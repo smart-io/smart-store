@@ -1,5 +1,5 @@
 import * as Actions from './CartActions';
-import DefaultCart, * as Cart from './Cart';
+import Cart from './Cart';
 
 export default function cart(state = {}, action) {
   switch (action.type) {
@@ -19,7 +19,7 @@ export default function cart(state = {}, action) {
     return state;
 
   case Actions.EMPTY_CART:
-    state = {...DefaultCart};
+    state = {...new Cart};
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
     return state;
 

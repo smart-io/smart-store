@@ -1,5 +1,5 @@
 import * as Actions from './OrderActions';
-import * as Order from './Order';
+import Order from './Order';
 
 export default function order(state = {}, action) {
   switch (action.type) {

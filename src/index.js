@@ -1,23 +1,21 @@
 import Config from './Config';
 import { reducers, store, dispatch, initialState } from './App';
-import * as Cart from './Cart/CartActions';
+import * as Cart from './Cart/Cart';
 import * as Order from './Order/OrderActions';
 
 export default class {
-  static Cart = Cart;
-  static Order = Order;
   static Config = Config;
   static reducers = reducers;
   static store = store;
   static dispatch = dispatch;
   static initialState = initialState;
 
-  static cart = class {
-    addItem = (item) => { return dispatch(Cart.addCartItem(item)); };
-    changeItemQuantity = (item, quantity) => { return dispatch(Cart.changeCartItemQuantity(item, quantity)); };
-    removeItem = (index) => { return dispatch(Cart.removeCartItem(index)); };
-    empty = (index) => { return dispatch(Cart.emptyCart(index)); };
-  };
+  /**
+   * @return {Cart}
+   */
+  static get cart() {
+    return new Cart();
+  }
 
   static order = class {
     update = (data) => { return dispatch(Order.updateOrder(data)); };
