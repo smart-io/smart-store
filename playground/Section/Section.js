@@ -4,6 +4,7 @@ import Form from './Form';
 import Param from './Param';
 import Message from './Message';
 import Errors from './Errors';
+import Request from './Request';
 
 const styles = {
   section: {
@@ -20,6 +21,7 @@ class Section extends Component {
   static Param = Param;
   static Message = Message;
   static Errors = Errors;
+  static Request = Request;
 
   render() {
     return (

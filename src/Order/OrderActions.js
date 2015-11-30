@@ -9,91 +9,63 @@ export const CHANGE_ORDER_SHIPPING_ADDRESS = 'CHANGE_ORDER_SHIPPING_ADDRESS';
 export const CHANGE_ORDER_CUSTOMER = 'CHANGE_ORDER_CUSTOMER';
 export const CHANGE_ORDER_CARD = 'CHANGE_ORDER_CARD';
 export const REQUEST_CREATE_ORDER = 'REQUEST_CREATE_ORDER';
-export const RECEIVE_CREATED_ORDER = 'RECEIVE_CREATED_ORDER';
+export const RECEIVE_ORDER = 'RECEIVE_ORDER';
 export const RECEIVE_ORDER_EXCEPTIONS = 'RECEIVE_ORDER_EXCEPTIONS';
 export const VALIDATE_ORDER = 'VALIDATE_ORDER';
 export const ORDER_VALIDATED = 'ORDER_VALIDATED';
 export const ORDER_EXCEPTIONS = 'ORDER_EXCEPTIONS';
+export const RECEIVE_FETCH_ORDER_EXCEPTIONS = 'RECEIVE_FETCH_ORDER_EXCEPTIONS';
 
 export function updateOrder(data) {
-  return {
-    type: UPDATE_ORDER,
-    data: data
-  };
+  return { type: UPDATE_ORDER, data: data };
 }
 
 export function convertCartToOrder(cart) {
-  return {
-    type: CONVERT_CART_TO_ORDER,
-    cart: cart
-  };
+  return { type: CONVERT_CART_TO_ORDER, cart: cart };
 }
 
 export function changeOrderBillingAddress(address) {
-  return {
-    type: CHANGE_ORDER_BILLING_ADDRESS,
-    address: address
-  };
+  return { type: CHANGE_ORDER_BILLING_ADDRESS, address: address };
 }
 
 export function changeOrderShippingAddress(address) {
-  return {
-    type: CHANGE_ORDER_SHIPPING_ADDRESS,
-    address: address
-  };
+  return { type: CHANGE_ORDER_SHIPPING_ADDRESS, address: address };
 }
 
 export function changeOrderCustomer(customer) {
-  return {
-    type: CHANGE_ORDER_CUSTOMER,
-    customer: customer
-  };
+  return { type: CHANGE_ORDER_CUSTOMER, customer: customer };
 }
 
 export function changeOrderCard(card) {
-  return {
-    type: CHANGE_ORDER_CARD,
-    card: card
-  };
+  return { type: CHANGE_ORDER_CARD, card: card };
 }
 
 export function requestCreateOrder() {
-  return {
-    type: REQUEST_CREATE_ORDER
-  };
+  return { type: REQUEST_CREATE_ORDER };
 }
 
-export function receiveCreatedOrder(data) {
-  return {
-    type: RECEIVE_CREATED_ORDER,
-    data: data
-  };
+export function receiveOrder(data) {
+  return { type: RECEIVE_ORDER, data: data };
 }
 
 export function receiveOrderExcpetion(errors) {
-  return {
-    type: RECEIVE_ORDER_EXCEPTIONS,
-    errors: errors
-  };
+  return { type: RECEIVE_ORDER_EXCEPTIONS, errors: errors };
 }
 
 function dispatchValidateOrder() {
-  return {
-    type: VALIDATE_ORDER
-  };
+  return { type: VALIDATE_ORDER };
 }
 
 function orderValidated() {
-  return {
-    type: ORDER_VALIDATED
-  };
+  return { type: ORDER_VALIDATED };
 }
 
 export function orderExcpetions(errors) {
-  return {
-    type: ORDER_EXCEPTIONS,
-    errors: errors
-  };
+  return { type: ORDER_EXCEPTIONS, errors: errors };
+}
+
+export function receiveFetchOrderExcpetion(errors) {
+  return { type: RECEIVE_FETCH_ORDER_EXCEPTIONS, errors: errors };
 }
 
 export function validateOrder() {
@@ -123,7 +95,7 @@ export function placeOrder() {
       data: getState().order
     })
       .then(function (data) {
-        dispatch(receiveCreatedOrder(data));
+        dispatch(receiveOrder(data));
         return Promise.resolve(data);
       })
       .catch(function (data) {

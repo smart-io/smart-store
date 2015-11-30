@@ -6,7 +6,7 @@ import Card from '../../src/Card/Card';
 import Customer from '../../src/Customer/Customer';
 
 @PlaygroundComponent
-class Order extends Component {
+class PlaceOrder extends Component {
   static contextTypes = {
     store: PropTypes.object
   };
@@ -101,4 +101,4 @@ class Order extends Component {
   }
 }
 
-export default Order;
+export default PlaceOrder;

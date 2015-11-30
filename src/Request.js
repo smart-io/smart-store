@@ -21,6 +21,22 @@ function parseJSON(response) {
 }
 
 export default class Request {
+  static events = {};
+
+  static on(event, callback) {
+    if (!Request.events[event]) {
+      Request.events[event] = [];
+    }
+    Request.events[event] = [...Request.events[event], callback];
+  }
+
+  static trigger(event, data) {
+    if (!Request.events[event]) {
+      Request.events[event] = [];
+    }
+    Request.events[event].forEach((callback, event) => { callback(data); });
+  }
+
   constructor(request) {
     return new Promise(function(resolve, reject) {
       let { url, ...options } = request;
@@ -28,17 +44,21 @@ export default class Request {
         options.body = JSON.stringify(options.data);
         delete options.data;
       }
+      Request.trigger('fetch', { url: url, ...options });
       return fetch(url, options)
         .then(checkStatus)
         .then(parseJSON).then(function (data) {
+          Request.trigger('success', { url: url, ...options, response: data });
           resolve(data);
         })
         .catch(function (data) {
           try {
             parseJSON(data).then(function (data) {
+              Request.trigger('error', { url: url, ...options, response: data });
               reject(data);
             });
           } catch (err) {
+            Request.trigger('error', { url: url, ...options, response: err });
             reject(err);
           }
         });

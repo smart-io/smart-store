@@ -12,13 +12,17 @@ const styles = {
 
 class Errors extends Component {
   render() {
+    const { style, ...props } = this.props;
+
     let errors = '';
     for (const error of Object.keys(this.props.errors)) {
       errors = errors + error;
     }
 
+    let componentStyle = {...styles.message, ...style};
+
     return (
-      <div style={styles.message}>
+      <div style={componentStyle}>
         <svg x="0px" y="0px" viewBox="0 0 8.7 8.7" style={styles.svg}>
           <path
             fill="#ff3900"
