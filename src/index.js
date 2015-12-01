@@ -1,6 +1,7 @@
 import * as App from './App';
 import Cart from './Cart/Cart';
 import Order from './Order/Order';
+import Orders from './Orders/Orders';
 
 class Store {
   static reducers = App.reducers;
@@ -38,6 +39,13 @@ class Store {
    */
   static get order() {
     return Order.initialize();
+  }
+
+  /**
+   * @return {Orders}
+   */
+  static get orders() {
+    return Orders.initialize();
   }
 }
 
