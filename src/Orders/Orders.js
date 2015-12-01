@@ -1,4 +1,5 @@
-import { store } from '../App';
+import { store, dispatch } from '../App';
+import * as Actions from './OrdersActions';
 
 class Orders {
   /**
@@ -20,6 +21,10 @@ class Orders {
 
   static reset(state, data) {
     return [...data];
+  }
+
+  fetchAllOrders() {
+    return dispatch(Actions.fetchAllOrders());
   }
 }
 
