@@ -9,14 +9,14 @@ class Orders {
 
   constructor(items) {
     if (items) {
-      for (const key of items) {
+      for (const key in items) {
         this.items[key] = items[key];
       }
     }
   }
 
   static initialize() {
-    return new Orders(store.getState().orders.items || []);
+    return new Orders(store.getState().orders);
   }
 
   static reset(state, data) {
