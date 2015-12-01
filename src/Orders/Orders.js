@@ -1,5 +1,4 @@
 import { store } from '../App';
-//import * as Actions from './OrdersActions';
 
 class Orders {
   /**
@@ -19,7 +18,8 @@ class Orders {
     return new Orders(store.getState().orders);
   }
 
-  static reset(/*state, data*/) {
+  static reset(state, data) {
+    return [...data];
   }
 }
 

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 const styles = {
   marginRight: '12px',
+  marginBottom: '12px',
   fontSize: '11px',
   border: '1px solid gray',
   borderRadius: '3px',

@@ -20,6 +20,8 @@ document.body.style.backgroundColor = '#141517';
 const styles = {
   controls: {
     display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     marginBottom: '20px'
   },
 
@@ -32,7 +34,8 @@ const styles = {
 class Playground extends Component {
   static childContextTypes = {
     store: PropTypes.object,
-    url: PropTypes.func
+    url: PropTypes.func,
+    session: PropTypes.func
   };
 
   constructor(...args) {
@@ -44,6 +47,9 @@ class Playground extends Component {
     }
     if (typeof this.props.url === 'function') {
       this.props.url(this.state.url);
+    }
+    if (typeof this.props.session === 'function') {
+      this.props.session(this.state.session);
     }
   }
 
@@ -73,12 +79,20 @@ class Playground extends Component {
     }
   };
 
+  changeSession = (value) => {
+    this.setState({ session: value });
+    if (typeof this.props.session === 'function') {
+      this.props.session(value);
+    }
+  };
+
   render() {
     return (
       <div>
         <div style={styles.controls}>
-          <div style={{marginRight: 'auto'}}>
+          <div style={{marginRight: 'auto', display: 'flex', flexWrap: 'wrap' }}>
             {!this.props.url || <Field name="URL" value={this.state.url} onChange={this.changeUrl}/>}
+            {!this.props.session || <Field name="Session" value={this.state.session} onChange={this.changeSession}/>}
           </div>
           <Action color="red" name="Reset" action={this.reset}/>
         </div>

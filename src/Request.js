@@ -1,3 +1,4 @@
+import App from './index';
 import fetch from 'isomorphic-fetch';
 
 function checkStatus(response) {
@@ -34,7 +35,7 @@ export default class Request {
     if (!Request.events[event]) {
       Request.events[event] = [];
     }
-    Request.events[event].forEach((callback, event) => { callback(data); });
+    Request.events[event].forEach((callback) => { callback(data); });
   }
 
   constructor(request) {
@@ -43,6 +44,11 @@ export default class Request {
       if (options.data) {
         options.body = JSON.stringify(options.data);
         delete options.data;
+      }
+      if (App.session) {
+        options.headers = {
+          'X-Session': App.session
+        };
       }
       Request.trigger('fetch', { url: url, ...options });
       return fetch(url, options)

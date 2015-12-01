@@ -12,12 +12,17 @@ class GetOrders extends Component {
 
   static subscribe = 'orders';
 
-  getOrders = () => {
+  getOrder = () => {
     this.context.store.dispatch(Actions.fetchOrders());
   };
 
+  getAllOrders = () => {
+    this.context.store.dispatch(Actions.fetchAllOrders());
+  };
+
   actions = {
-    getOrders: this.getOrders
+    getOrder: this.getOrder,
+    getAllOrders: this.getAllOrders
   };
 
   componentDidMount() {

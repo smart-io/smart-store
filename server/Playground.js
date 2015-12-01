@@ -9,7 +9,7 @@ import GetOrders from './Components/GetOrders';
 const store = devFinalCreateStore(reducers, initialState);
 
 ReactDOM.render((
-  <Playground store={store} url={(value) => Store.url = value}>
+  <Playground store={store} url={(value) => Store.url = value} session={(value) => Store.session = value}>
       <Cart/>
       <PlaceOrder/>
       <GetOrders/>
