@@ -16,7 +16,7 @@ class Orders {
   }
 
   static initialize() {
-    return new Orders(store.getState().orders);
+    return new Orders(store.getState().orders.items || []);
   }
 
   static reset(state, data) {
