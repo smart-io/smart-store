@@ -21,7 +21,9 @@ function ExtendComposedComponent(options, ComposedComponent) {
       try {
         this.state = JSON.parse(localStorage['component-state-' + functionName(ComposedComponent)]);
       } catch (err) {
-        this.state = { state: {} };
+        if (!this.state) {
+          this.state = { state: {} };
+        }
       }
 
       context.store.subscribe(() =>

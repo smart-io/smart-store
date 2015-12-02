@@ -7,6 +7,10 @@ export default function order(state = {}, action) {
     state = Orders.reset(state, action.data);
     return state;
 
+  case Actions.RECEIVE_SINGLE_ORDER:
+    state = Orders.updateOrder(state, action.data);
+    return state;
+
   default:
     return state;
   }

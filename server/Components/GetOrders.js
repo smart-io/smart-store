@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section } from '../../playground/index';
-import * as Actions from '../../src/Orders/OrdersActions';
+import * as OrdersActions from '../../src/Orders/OrdersActions';
 import Request from '../../src/Request';
 import App from '../../src/index';
 
@@ -12,12 +12,19 @@ class GetOrders extends Component {
 
   static subscribe = 'orders';
 
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      state: []
+    };
+  }
+
   getOrder = () => {
-    this.context.store.dispatch(Actions.fetchOrders());
+    this.context.store.dispatch(OrdersActions.fetchOrders());
   };
 
   getAllOrders = () => {
-    this.context.store.dispatch(Actions.fetchAllOrders());
+    this.context.store.dispatch(OrdersActions.fetchAllOrders());
   };
 
   actions = {
@@ -50,6 +57,12 @@ class GetOrders extends Component {
     }
   };
 
+  shipOrder = (index) => {
+    const order = {...this.state.state[index]};
+    order.tracking_number = prompt('Tracking Number', order.tracking_number);
+    this.context.store.dispatch(OrdersActions.shipOrder(order));
+  };
+
   isOwnRequest(data) {
     let url = data.url.replace(App.url, '');
     return url.match(/^\/orders/);
@@ -60,6 +73,13 @@ class GetOrders extends Component {
       <View>
         <Section>
           <Section.Request ref="request"/>
+        </Section>
+        <Section>
+          <Section.Items
+            show={['id', 'order_number', 'tracking_number', 'currency', 'total']}
+            items={this.state.state}
+            shipOrder={this.shipOrder}
+          />
         </Section>
       </View>
     );

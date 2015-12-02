@@ -28,6 +28,11 @@ class Order {
   /**
    * @type {String}
    */
+  tracking_number = null;
+
+  /**
+   * @type {String}
+   */
   currency = 'USD';
 
   /**

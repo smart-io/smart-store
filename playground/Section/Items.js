@@ -20,6 +20,18 @@ const styles = {
     padding: '8px 12px',
   },
 
+  tbodyTdNullSpan: {
+    color: 'rgba(255, 255, 255, .3)',
+  },
+
+  tbodyTdNumberSpan: {
+    color: 'rgb(252, 109, 36)'
+  },
+
+  tbodyTdObjectSpan: {
+    color: '#a8ff00'
+  },
+
   tfootTd: {
     borderTop: '1px solid rgba(255, 255, 255, .1)',
     padding: '8px 12px',
@@ -30,11 +42,12 @@ const styles = {
 
 class Items extends Component {
   static propTypes = {
-    items: PropTypes.array
+    items: PropTypes.array,
+    show: PropTypes.array
   };
 
   render() {
-    const { items, showTotals, ...actions } = this.props;
+    const { items, showTotals, show, ...actions } = this.props;
     let children = [];
 
     if (items) {
@@ -65,6 +78,9 @@ class Items extends Component {
     if (typeof this.props.items !== 'undefined' && typeof this.props.items[0] !== 'undefined') {
       let children = [<td style={{...styles.theadTd, width: '50px'}} key="index">index</td>];
       for (const prop of Object.keys(this.props.items[0])) {
+        if (this.props.show && this.props.show.indexOf(prop) === -1) {
+          continue;
+        }
         children.push(<td style={styles.theadTd} key={prop}>{prop}</td>);
       }
       children.push(<td style={{...styles.theadTd, width: '10px'}} key="actions"/>);
@@ -76,7 +92,19 @@ class Items extends Component {
   renderChild(index, item, actions) {
     let children = [<td style={styles.tbodyTd} key="index">{index}</td>];
     for (const prop of Object.keys(item)) {
-      children.push(<td style={styles.tbodyTd} key={prop}>{item[prop]}</td>);
+      if (this.props.show && this.props.show.indexOf(prop) === -1) {
+        continue;
+      }
+      if (item[prop] === null || item[prop] === undefined) {
+        children.push(<td style={styles.tbodyTd} key={prop}><span style={styles.tbodyTdNullSpan}>NULL</span>
+        </td>);
+      } else if (typeof item[prop] === 'object') {
+        children.push(<td style={styles.tbodyTd} key={prop}><span style={styles.tbodyTdObjectSpan}>{"{Object}"}</span></td>);
+      } else if (typeof item[prop] === 'number') {
+        children.push(<td style={styles.tbodyTd} key={prop}><span style={styles.tbodyTdNumberSpan}>{item[prop]}</span></td>);
+      } else {
+        children.push(<td style={styles.tbodyTd} key={prop}>{item[prop]}</td>);
+      }
     }
     children.push(this.renderItemActions(index, actions));
     return <tr key={index}>{children}</tr>;

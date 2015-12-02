@@ -36,7 +36,7 @@ class Field extends Component {
 
   changeValue = () => {
     let value;
-    if (value = prompt(this.props.name)) {
+    if (value = prompt(this.props.name, this.state.value)) {
       this.setState({ value: value });
       if (this.props.onChange) {
         this.props.onChange(value);

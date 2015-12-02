@@ -10,11 +10,10 @@ export const CHANGE_ORDER_CUSTOMER = 'CHANGE_ORDER_CUSTOMER';
 export const CHANGE_ORDER_CARD = 'CHANGE_ORDER_CARD';
 export const REQUEST_CREATE_ORDER = 'REQUEST_CREATE_ORDER';
 export const RECEIVE_ORDER = 'RECEIVE_ORDER';
-export const RECEIVE_ORDER_EXCEPTIONS = 'RECEIVE_ORDER_EXCEPTIONS';
+export const RECEIVE_ORDER_EXCEPTION = 'RECEIVE_ORDER_EXCEPTION';
 export const VALIDATE_ORDER = 'VALIDATE_ORDER';
 export const ORDER_VALIDATED = 'ORDER_VALIDATED';
 export const ORDER_EXCEPTIONS = 'ORDER_EXCEPTIONS';
-export const RECEIVE_FETCH_ORDER_EXCEPTIONS = 'RECEIVE_FETCH_ORDER_EXCEPTIONS';
 
 export function updateOrder(data) {
   return { type: UPDATE_ORDER, data: data };
@@ -49,7 +48,7 @@ export function receiveOrder(data) {
 }
 
 export function receiveOrderExcpetion(errors) {
-  return { type: RECEIVE_ORDER_EXCEPTIONS, errors: errors };
+  return { type: RECEIVE_ORDER_EXCEPTION, errors: errors };
 }
 
 function dispatchValidateOrder() {
@@ -62,10 +61,6 @@ function orderValidated() {
 
 export function orderExcpetions(errors) {
   return { type: ORDER_EXCEPTIONS, errors: errors };
-}
-
-export function receiveFetchOrderExcpetion(errors) {
-  return { type: RECEIVE_FETCH_ORDER_EXCEPTIONS, errors: errors };
 }
 
 export function validateOrder() {
