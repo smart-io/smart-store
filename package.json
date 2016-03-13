@@ -35,6 +35,6 @@
     "lint": "./node_modules/.bin/eslint ./src ./test",
     "build": "npm run lint",
     "prepublish": "npm run build",
-    "playground": "PROD_DEV=1 ./node_modules/.bin/babel-node -- node_modules/webpack-dev-server/bin/webpack-dev-server.js --port 3000 --inline --colors --hot"
+    "playground": "PROD_DEV=1 ./node_modules/.bin/babel-node -- node_modules/webpack-dev-server/bin/webpack-dev-server.js --port 3010 --inline --colors --hot"
   }
 }

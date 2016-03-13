@@ -176,6 +176,18 @@ class Order {
     };
   }
 
+  changeCurrency(currency) {
+    return dispatch(Actions.changeOrderCurrency(currency));
+  }
+
+  static changeCurrency(order, currency) {
+    return {
+      ...new Order,
+      ...order,
+      currency: currency
+    };
+  }
+
   validate() {
     return dispatch(Actions.validateOrder());
   }
