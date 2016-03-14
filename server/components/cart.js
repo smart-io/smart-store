@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section, Ui } from '../../playground/index';
-import * as actions from '../../src/Cart/CartActions';
-import Item from '../../src/Item/Item';
+import * as actions from '../../src/cart/cart-actions';
+import Item from '../../src/item/item';
 
 @PlaygroundComponent
 class Cart extends Component {

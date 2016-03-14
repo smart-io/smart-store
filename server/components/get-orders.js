@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section } from '../../playground/index';
-import * as OrdersActions from '../../src/Orders/OrdersActions';
-import Request from '../../src/Request';
+import * as OrdersActions from '../../src/orders/orders-actions';
+import Request from '../../src/request';
 import App from '../../src/index';
 
 @PlaygroundComponent
