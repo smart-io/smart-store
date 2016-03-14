@@ -1,10 +1,10 @@
-import Logger from './ReduxStore';
+import Logger from './redux-store';
 import React, { Component, PropTypes } from 'react';
-import HeaderView from './Views/HeaderView';
-import { functionName } from './Helper';
-import RequestView from './Views/RequestView';
-import StateView from './Views/StateView';
-import ResultView from './Views/ResultView';
+import HeaderView from './views/header-view';
+import { functionName } from './helper';
+import RequestView from './views/request-view';
+import StateView from './views/state-view';
+import ResultView from './views/result-view';
 
 class StateComponent extends Component {
   static contextTypes = {

@@ -1,7 +1,17 @@
-import { dispatch } from '../../src/App';
 import React, { Component, PropTypes } from 'react';
+import Action from './action';
 
-class ActionsView extends Component {
+const styles = {
+  span: {
+    fontSize: '11px',
+    textTransform: 'uppercase',
+    marginRight: '12px',
+    marginLeft: '32px',
+    color: 'rgba(168, 255, 0, .4)'
+  }
+};
+
+class Actions extends Component {
   static contextTypes = {
     component: PropTypes.any
   };
@@ -31,33 +41,26 @@ class ActionsView extends Component {
 
     return (
       <div>
+        <span style={styles.span}>Actions</span>
         {actions}
       </div>
     );
   }
 
-  renderAction(name, action, callback) {
+  renderAction(name, action) {
     return (
-      <button
-        key={name}
-        onClick={callback || this.onClick.bind(this, action)}
-        style={{
-          WebkitApperance: 'none',
-          marginRight: '12px',
-          border: '1px solid #00b4ff',
-          borderRadius: '3px',
-          background: 'rgba(0, 180, 255, .2)',
-          color: '#00b4ff',
-          cursor: 'pointer'
-        }}
-      >
-        {name}
-      </button>
+      <Action key={name} name={name}
+        action={this.action.bind(this, action)}
+      />
     );
   }
 
-  onClick(action) {
-    this.context.component.setState({
+  action = (action) => {
+    action();
+  };
+
+  onClick() {
+    /*this.context.component.setState({
       loading: true,
       error: null,
       actionResult: null
@@ -65,7 +68,7 @@ class ActionsView extends Component {
 
     dispatch(action(this.getData()))
       .then(this.onSuccess)
-      .catch(this.onError)
+      .catch(this.onError)*/
   }
 
   onSuccess = (action) => {
@@ -111,4 +114,4 @@ class ActionsView extends Component {
   };
 }
 
-export default ActionsView;
+export default Actions;

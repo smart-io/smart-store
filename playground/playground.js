@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
-import Field from './Ui/Field';
-import Action from './Ui/Action';
+import Field from './ui/field';
+import Action from './ui/action';
 
 document.body.innerHTML = `
   <div id="main" style="margin-right: 280px"></div>

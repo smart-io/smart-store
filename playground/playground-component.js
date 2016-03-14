@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { functionName } from './Helper';
-import HeaderView from './Views/HeaderView';
-import Actions from './Ui/Actions';
+import { functionName } from './helper';
+import HeaderView from './views/header-view';
+import Actions from './ui/actions';
 
 const styles = {
   marginBottom: '20px',

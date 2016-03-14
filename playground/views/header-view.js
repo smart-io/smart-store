@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import ArrowButton from '../Ui/ArrowButton';
-import ErrorView from './ErrorView';
-import ActionView from './ActionView';
-import StateInfoView from './StateInfoView';
-import Loader from '../Ui/Loader';
+import ArrowButton from '../ui/arrow-button';
+import ErrorView from './error-view';
+import ActionView from './action-view';
+import StateInfoView from './state-info-view';
+import Loader from '../ui/loader';
 
 class HeaderView extends Component {
   static contextTypes = {

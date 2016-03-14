@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { store, dispatch } from '../../src/App';
-import Item from '../../src/Item/Item';
-import * as actions from '../../src/Cart/CartActions';
+import { store, dispatch } from '../../src/app';
+import Item from '../../src/item/item';
+import * as actions from '../../src/cart/cart-actions';
 
 describe('Cart', () => {
   it('add item to cart', () => {

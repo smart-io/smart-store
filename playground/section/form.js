@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import Action from '../Ui/Action';
+import Action from '../ui/action';
 
 const styles = {
   container: {

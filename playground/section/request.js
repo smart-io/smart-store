@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Errors from './Errors';
-import Loader from '../Ui/Loader';
+import Errors from './errors';
+import Loader from '../ui/loader';
 
 const styles = {
   container: {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Items from './Items';
-import Form from './Form';
-import Param from './Param';
-import Message from './Message';
-import Errors from './Errors';
-import Request from './Request';
+import Items from './items';
+import Form from './form';
+import Param from './param';
+import Message from './message';
+import Errors from './errors';
+import Request from './request';
 
 const styles = {
   section: {
