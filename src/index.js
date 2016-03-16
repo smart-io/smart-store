@@ -13,12 +13,12 @@ export function store() {
     return {
       ...store,
       dispatch(...args) {
-        store.dispatch(...args);
         reduxStore.dispatch(...args);
+        store.dispatch(...args);
         return args[0];
       },
       getState() {
-        return { ...store.getState(), ...reduxStore.getState() };
+        return { ...reduxStore.getState(), ...store.getState() };
       }
     };
   };

@@ -11,13 +11,6 @@ class Cart extends Component {
 
   static subscribe = 'cart';
 
-  constructor(...args) {
-    super(...args);
-    this.state = {
-      state: {items: []}
-    };
-  }
-
   showCartItemModal = () => {
     this.refs.modal.setState({ isOpen: true });
   };
@@ -53,7 +46,7 @@ class Cart extends Component {
       <View>
         <Section.Items
           showTotals={['quantity', 'price', 'subtotal']}
-          items={this.state.state.items}
+          items={this.state.state.cart.items}
           removeCartItem={this.removeCartItem}
           changeCartItemQuantity={this.changeCartItemQuantity}
         />

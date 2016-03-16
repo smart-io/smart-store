@@ -26,10 +26,14 @@ function ExtendComposedComponent(options, ComposedComponent) {
         }
       }
 
-      context.store.subscribe(() =>
-        this.setState({
-          state: context.store.getState()[this.constructor.subscribe]
-        })
+      this.state.state[this.constructor.subscribe] = context.store.getState()[this.constructor.subscribe];
+
+      context.store.subscribe(
+        () => {
+          let newState = { state: {} };
+          newState.state[this.constructor.subscribe] = context.store.getState()[this.constructor.subscribe];
+          super.setState(newState);
+        }
       );
     }
 

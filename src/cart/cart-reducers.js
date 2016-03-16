@@ -6,6 +6,7 @@ export default function cart(state = {}, action) {
   case Actions.ADD_CART_ITEM:
     state = Cart.addItem(state, action.item);
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
+    console.log(state);
     return state;
 
   case Actions.CHANGE_CART_ITEM_QUANTITY:
