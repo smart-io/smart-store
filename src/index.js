@@ -1,7 +1,45 @@
-import * as App from './app';
-import Cart from './cart/cart';
-import Order from './order/order';
-import Orders from './orders/orders';
+import reduxStore from './app';
+
+export function store() {
+  return next => (reducer, initialState, enhancer) => {
+    function nextReducer() {
+      return function (state = {}, action) {
+        state = reducer(state, action);
+        return { ...state, ...reduxStore.getState() };
+      };
+    }
+    const store = next(nextReducer(), initialState, enhancer);
+
+    return {
+      ...store,
+      dispatch(...args) {
+        store.dispatch(...args);
+        reduxStore.dispatch(...args);
+        return args[0];
+      },
+      getState() {
+        return { ...store.getState(), ...reduxStore.getState() };
+      }
+    };
+  };
+}
+
+let _config = { url: null };
+export function config(config, value = null) {
+  if (value !== null) {
+    let newConfig = {};
+    newConfig[config] = value;
+    config = newConfig;
+  }
+  _config = { ..._config, ...config };
+}
+
+export function getConfig() {
+  return _config;
+}
+
+/*export { default as Order } from './order/order';
+
 
 class Store {
   static reducers = App.reducers;
@@ -27,23 +65,14 @@ class Store {
     return Store._url;
   }
 
-  /**
-   * @return {Cart}
-   */
   static get cart() {
     return Cart.initialize();
   }
 
-  /**
-   * @return {Order}
-   */
   static get order() {
-    return Order.initialize();
+    return new Order(store.getState().order);
   }
 
-  /**
-   * @return {Orders}
-   */
   static get orders() {
     return Orders.initialize();
   }
@@ -54,3 +83,4 @@ export const reducers = Store.reducers;
 export const store = Store.store;
 export const dispatch = Store.dispatch;
 export const initialState = Store.initialState;
+*/

@@ -7,7 +7,7 @@ const DEV = process.env['PROD_DEV'] && process.env['PROD_DEV'] != '0' ? true : f
 module.exports = {
   entry: {
     index:  ['webpack/hot/dev-server', './src/index.js'],
-    ...(DEV && {playground: ['webpack/hot/dev-server', './server/Playground.js']})
+    ...(DEV && {playground: ['webpack/hot/dev-server', './server/playground.js']})
   },
 
   output: {
@@ -23,13 +23,13 @@ module.exports = {
   devtool: DEV ? 'source-map' : false,
 
   module: {
-    preLoaders: [
+    /*preLoaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'eslint-loader'
       }
-    ],
+    ],*/
     loaders: [
       {
         test: /\.(js)$/,

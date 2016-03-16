@@ -1,96 +1,82 @@
-import { store, dispatch } from '../app';
-import Address from '../address/address';
-import Customer from '../customer/customer';
-import Card from '../card/card';
-import * as Actions from './order-actions';
+import { createStore, combineReducers } from '../app';
+import * as orderActions from './order-actions';
+import Address from './address/address';
+import { default as shippingAddress, default as billingAddress } from './address/address-reducers';
+import Customer from './customer/customer';
+import customer from './customer/customer-reducers';
+import Card from './card/card';
+import card from './card/card-reducers';
+import taxes from './taxes/taxes-reducers';
+import * as taxesActions from './taxes/taxes-actions';
+import items from './items/items-reducers';
+import fees from './fees/fees-reducers';
 
 class Order {
-  /**
-   * @type {Number}
-   */
-  id = null;
-
-  /**
-   * @type {String}
-   */
-  user_id = null;
-
-  /**
-   * @type {String}
-   */
-  order_number = null;
-
-  /**
-   * @type {String}
-   */
-  status = null;
-
-  /**
-   * @type {String}
-   */
-  tracking_number = null;
-
-  /**
-   * @type {String}
-   */
-  currency = 'USD';
-
-  /**
-   * @type {Object|Address}
-   */
-  shipping_address = { ...new Address };
-
-  /**
-   * @type {Object|Address}
-   */
-  billing_address = { ...new Address };
-
-  /**
-   * @type {Object|Customer}
-   */
-  customer = { ...new Customer };
-
-  /**
-   * @type {Object|Card}
-   */
-  card = { ...new Card };
-
-  /**
-   * @type {Array.<Item>}
-   */
-  items = [];
-
-  /**
-   * @type {Number}
-   */
-  subtotal = 0;
-
-  /**
-   * @type {Array.<Object>}
-   */
-  fees = [];
-
-  /**
-   * @type {Array.<Tax>}
-   */
-  taxes = [];
-
-  /**
-   * @type {Number}
-   */
-  total = 0;
-
   constructor(attributes) {
+    let defaults = {
+      id: null,
+      userId: null,
+      orderNumber: null,
+      status: null,
+      trackingNumber: null,
+      currency: 'USD',
+      shippingAddress: { ...new Address },
+      billingAddress: { ...new Address },
+      customer: { ...new Customer },
+      card: { ...new Card },
+      items: [],
+      subtotal: 0,
+      fees: [],
+      taxes: [],
+      total: 0
+    };
+
     if (attributes) {
       for (const key of Object.keys(attributes)) {
-        this[key] = attributes[key];
+        defaults[key] = attributes[key];
       }
     }
-  }
 
-  static initialize() {
-    return new Order(store.getState().order);
+    // APPARENTLY ALL I NEED IS ONE STORE LOL
+
+    /*this._store = createStore(
+      combineReducers(
+        shippingAddress,
+        billingAddress,
+        customer,
+        card,
+        items,
+        fees,
+        taxes
+      ),
+      defaults
+    );*/
   }
+/*
+  get id() { return this._store.getState().id; }
+  set id(value) { this._store.dispatch(orderActions.updateOrder({ id: value })); }
+
+  get userId() { return this._store.getState().userId; }
+  set userId(value) { this._store.dispatch(orderActions.updateOrder({ userId: value })); }
+
+  get orderNumber() { return this._store.getState().orderNumber; }
+  set orderNumber(value) { this._store.dispatch(orderActions.updateOrder({ orderNumber: value })); }
+
+  get status() { return this._store.getState().status; }
+  set status(value) { this._store.dispatch(orderActions.updateOrder({ status: value })); }
+
+  get trackingNumber() { return this._store.getState().trackingNumber; }
+  set trackingNumber(value) { this._store.dispatch(orderActions.updateOrder({ trackingNumber: value })); }
+
+  get currency() { return this._store.getState().currency; }
+  set currency(value) { this._store.dispatch(orderActions.updateOrder({ currency: value })); }
+
+  get taxes() { return this._store.getState().taxes; }
+  set taxes(taxes) { this._store.dispatch(taxesActions.resetTaxes(taxes)); }
+  addTax(tax) { dispatch(taxesActions.addTax(tax)); }
+  removeTax(index) { dispatch(taxesActions.removeTax(index)); }
+
+
 
   static calculateAmounts(order) {
     let subtotal = 0;
@@ -194,7 +180,7 @@ class Order {
 
   place() {
     return dispatch(Actions.placeOrder());
-  }
+  }*/
 }
 
 export default Order;

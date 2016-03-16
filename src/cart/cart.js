@@ -1,5 +1,5 @@
 import { store, dispatch } from '../app';
-import Item from '../item/item';
+import Item from '../order/items/item';
 import * as Actions from './cart-actions';
 
 class Cart {

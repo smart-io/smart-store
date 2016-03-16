@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import Field from './ui/field';
 import Action from './ui/action';
 
 document.body.innerHTML = `
-  <div id="main" style="margin-right: 280px"></div>
+  <div id="main"></div>
 `;
 
 let script = document.createElement('script');
@@ -34,22 +33,31 @@ const styles = {
 class Playground extends Component {
   static childContextTypes = {
     store: PropTypes.object,
-    url: PropTypes.func,
-    session: PropTypes.func
+    getConfig: PropTypes.func,
+    changeConfig: PropTypes.func
   };
 
   constructor(...args) {
     super(...args);
+    this.state = {};
+    let defaultConfig = {};
+    if (typeof this.props.getConfig === 'function') {
+      defaultConfig = this.props.getConfig();
+    }
     try {
-      this.state = JSON.parse(localStorage['playground-state']);
-    } catch (e) {
-      this.state = {};
+      this.state = {
+        ...defaultConfig,
+        ...JSON.parse(localStorage['playground-state'])
+      }
+    } catch (err) {
     }
-    if (typeof this.props.url === 'function') {
-      this.props.url(this.state.url);
-    }
-    if (typeof this.props.session === 'function') {
-      this.props.session(this.state.session);
+
+    for (let prop in defaultConfig) {
+      if (defaultConfig.hasOwnProperty(prop)) {
+        if (defaultConfig[prop] !== this.state[prop] && typeof this.props.changeConfig === 'function') {
+          this.props.changeConfig(prop, this.state[prop]);
+        }
+      }
     }
   }
 
@@ -72,27 +80,33 @@ class Playground extends Component {
     window.location.reload(true);
   };
 
-  changeUrl = (value) => {
-    this.setState({ url: value });
-    if (typeof this.props.url === 'function') {
-      this.props.url(value);
-    }
-  };
-
-  changeSession = (value) => {
-    this.setState({ session: value });
-    if (typeof this.props.session === 'function') {
-      this.props.session(value);
+  changeConfig = (key, value) => {
+    if (typeof this.props.changeConfig === 'function') {
+      this.props.changeConfig(key, value);
+      let state = {};
+      state[key] = value;
+      this.setState(state);
     }
   };
 
   render() {
+    let configChildren = [];
+    if (typeof this.props.getConfig === 'function') {
+      let configs = this.props.getConfig();
+      for (let prop in configs) {
+        if (configs.hasOwnProperty(prop)) {
+          configChildren.push(
+            <Field key={prop} name={prop} value={configs[prop]} onChange={(v) => this.changeConfig(prop, v)}/>
+          );
+        }
+      }
+    }
+
     return (
       <div>
         <div style={styles.controls}>
           <div style={{marginRight: 'auto', display: 'flex', flexWrap: 'wrap' }}>
-            {!this.props.url || <Field name="URL" value={this.state.url} onChange={this.changeUrl}/>}
-            {!this.props.session || <Field name="Session" value={this.state.session} onChange={this.changeSession}/>}
+            {configChildren}
           </div>
           <Action color="red" name="Reset" action={this.reset}/>
         </div>
@@ -100,10 +114,6 @@ class Playground extends Component {
         <div style={styles.itemContainer}>
           {this.props.children}
         </div>
-
-        <DebugPanel top right bottom style={{fontSize: '12px'}}>
-          <DevTools store={this.props.store} monitor={LogMonitor}/>
-        </DebugPanel>
       </div>
     );
   }

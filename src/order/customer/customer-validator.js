@@ -1,4 +1,4 @@
-import Validator from '../validator';
+import Validator from '../../validator';
 import validator from 'validator';
 
 class CustomerValidator extends Validator {

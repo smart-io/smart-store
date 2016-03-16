@@ -1,7 +1,7 @@
 import Validator from '../validator';
-import AddressValidator from '../address/address-validator';
-import CardValidator from '../card/card-validator';
-import CustomerValidator from '../customer/customer-validator';
+import AddressValidator from './address/address-validator';
+import CardValidator from './card/card-validator';
+import CustomerValidator from './customer/customer-validator';
 
 class OrderValidator extends Validator {
   static validate(order) {

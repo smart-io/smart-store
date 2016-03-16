@@ -4,11 +4,6 @@ import Request from '../request';
 
 export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const CONVERT_CART_TO_ORDER = 'CONVERT_CART_TO_ORDER';
-export const CHANGE_ORDER_BILLING_ADDRESS = 'CHANGE_ORDER_BILLING_ADDRESS';
-export const CHANGE_ORDER_SHIPPING_ADDRESS = 'CHANGE_ORDER_SHIPPING_ADDRESS';
-export const CHANGE_ORDER_CUSTOMER = 'CHANGE_ORDER_CUSTOMER';
-export const CHANGE_ORDER_CARD = 'CHANGE_ORDER_CARD';
-export const CHANGE_ORDER_CURRENCY = 'CHANGE_ORDER_CURRENCY';
 export const REQUEST_CREATE_ORDER = 'REQUEST_CREATE_ORDER';
 export const RECEIVE_ORDER = 'RECEIVE_ORDER';
 export const RECEIVE_ORDER_EXCEPTION = 'RECEIVE_ORDER_EXCEPTION';
@@ -22,26 +17,6 @@ export function updateOrder(data) {
 
 export function convertCartToOrder(cart) {
   return { type: CONVERT_CART_TO_ORDER, cart: cart };
-}
-
-export function changeOrderBillingAddress(address) {
-  return { type: CHANGE_ORDER_BILLING_ADDRESS, address: address };
-}
-
-export function changeOrderShippingAddress(address) {
-  return { type: CHANGE_ORDER_SHIPPING_ADDRESS, address: address };
-}
-
-export function changeOrderCustomer(customer) {
-  return { type: CHANGE_ORDER_CUSTOMER, customer: customer };
-}
-
-export function changeOrderCard(card) {
-  return { type: CHANGE_ORDER_CARD, card: card };
-}
-
-export function changeOrderCurrency(currency) {
-  return { type: CHANGE_ORDER_CURRENCY, currency: currency };
 }
 
 export function requestCreateOrder() {
