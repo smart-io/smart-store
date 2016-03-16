@@ -1,25 +1,71 @@
-import * as Actions from './cart-actions';
+import * as actions from './cart-actions';
 import Cart from './cart';
+import Item from '../order/items/item';
+import { calculateItemSubtotal } from '../accounting/accounting';
 
-export default function cart(state = {}, action) {
+function addItem(cart, item) {
+  item = { ...new Item, ...calculateItemSubtotal(item) };
+  let items = [ ...cart.items ];
+  let updateItem = false;
+  for (var i = 0, len = items.length; i < len; ++i) {
+    if (items[i].code === item.code) {
+      items[i] = {
+        ...items[i],
+        ...item,
+        quantity: (items[i].quantity + item.quantity)
+      };
+      items[i] = calculateItemSubtotal(items[i]);
+      updateItem = true;
+      break;
+    }
+  }
+  if (!updateItem) items.push(item);
+  return { ...cart, items: items };
+}
+
+function removeItem(cart, index) {
+  return {
+    ...cart,
+    items: [
+      ...cart.items.slice(0, index),
+      ...cart.items.slice(index + 1)
+    ]
+  };
+}
+
+function changeItemQuantity(cart, index, quantity) {
+  let item = { ...new Item, ...cart.items[index], quantity: parseInt(quantity) };
+  item = calculateItemSubtotal(item);
+
+  return {
+    ...cart,
+    items: [
+      ...cart.items.slice(0, index),
+      item,
+      ...cart.items.slice(index + 1)
+    ]
+  };
+}
+
+export default function(state = {}, action) {
   switch (action.type) {
-  case Actions.ADD_CART_ITEM:
-    state = Cart.addItem(state, action.item);
+  case actions.ADD_CART_ITEM:
+    state = addItem(state, action.item);
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
     console.log(state);
     return state;
 
-  case Actions.CHANGE_CART_ITEM_QUANTITY:
-    state = Cart.changeItemQuantity(state, action.index, action.quantity);
+  case actions.CHANGE_CART_ITEM_QUANTITY:
+    state = changeItemQuantity(state, action.index, action.quantity);
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
     return state;
 
-  case Actions.REMOVE_CART_ITEM:
-    state = Cart.removeItem(state, action.index);
+  case actions.REMOVE_CART_ITEM:
+    state = removeItem(state, action.index);
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
     return state;
 
-  case Actions.EMPTY_CART:
+  case actions.EMPTY_CART:
     state = {...new Cart};
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
     return state;

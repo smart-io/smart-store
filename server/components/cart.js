@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section, Ui } from '../../playground/index';
-import * as actions from '../../src/cart/cart-actions';
+import * as cart from '../../src/cart/cart';
 import Item from '../../src/order/items/item';
 
 @PlaygroundComponent
@@ -17,28 +17,24 @@ class Cart extends Component {
 
   addCartItem = (value) => {
     this.refs.modal.setState({ isOpen: false });
-    this.context.store.dispatch(actions.addCartItem({...new Item, ...value}));
+    cart.addItem({...new Item, ...value});
   };
 
   removeCartItem = (index) => {
     if (index === undefined) {
       index = prompt('Cart item index');
     }
-    this.context.store.dispatch(actions.removeCartItem(index));
+    cart.removeItem(index);
   };
 
   changeCartItemQuantity = (index) => {
     const quantity = prompt('New quantity');
-    this.context.store.dispatch(actions.changeCartItemQuantity(index, quantity));
-  };
-
-  emptyCart = () => {
-    this.context.store.dispatch(actions.emptyCart());
+    cart.changeItemQuantity(index, quantity);
   };
 
   actions = {
     addCartItem: this.showCartItemModal,
-    emptyCart: this.emptyCart
+    emptyCart: cart.emptyCart
   };
 
   render() {
@@ -63,4 +59,3 @@ class Cart extends Component {
 }
 
 export default Cart;
-
