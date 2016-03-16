@@ -25,8 +25,8 @@ export function store() {
 }
 
 let _config = { url: null };
-export function config(config, value = null) {
-  if (value !== null) {
+export function config(config, value) {
+  if (value !== undefined) {
     let newConfig = {};
     newConfig[config] = value;
     config = newConfig;
