@@ -1,8 +1,8 @@
-import { createStore, combineReducers } from '../app';
+import { dispatch } from '../app';
 import * as order from './order-actions';
 import address from './address/address';
-import Customer from './customer/customer';
-import Card from './card/card';
+import customer from './customer/customer';
+import card from './card/card';
 import * as addressActions from './address/address-actions';
 
 export function convertCart(cart) {
@@ -21,18 +21,17 @@ export function changeShippingAddress(address) {
   return dispatch(addressActions.changeOrderAddress('shipping', address));
 }
 
-
 export default {
   id: null,
-  userId: null,
-  orderNumber: null,
+  user_id: null,
+  order_number: null,
   status: null,
-  trackingNumber: null,
+  tracking_number: null,
   currency: 'USD',
-  shippingAddress: { ...address },
-  billingAddress: { ...new Address },
-  customer: { ...new Customer },
-  card: { ...new Card },
+  shipping_address: { ...address },
+  billing_address: { ...address },
+  customer: { ...customer },
+  card: { ...card },
   items: [],
   subtotal: 0,
   fees: [],

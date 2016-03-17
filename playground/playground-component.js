@@ -22,16 +22,16 @@ function ExtendComposedComponent(options, ComposedComponent) {
         this.state = JSON.parse(localStorage['component-state-' + functionName(ComposedComponent)]);
       } catch (err) {
         if (!this.state) {
-          this.state = { state: {} };
+          this.state = {};
         }
       }
 
-      this.state.state[this.constructor.subscribe] = context.store.getState()[this.constructor.subscribe];
+      this.state[this.constructor.subscribe] = context.store.getState()[this.constructor.subscribe];
 
       context.store.subscribe(
         () => {
-          let newState = { state: {} };
-          newState.state[this.constructor.subscribe] = context.store.getState()[this.constructor.subscribe];
+          let newState = {};
+          newState[this.constructor.subscribe] = context.store.getState()[this.constructor.subscribe];
           super.setState(newState);
         }
       );

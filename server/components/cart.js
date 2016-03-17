@@ -42,7 +42,7 @@ class Cart extends Component {
       <View>
         <Section.Items
           showTotals={['quantity', 'price', 'subtotal']}
-          items={this.state.state.cart.items}
+          items={this.state.cart.items}
           removeCartItem={this.removeCartItem}
           changeCartItemQuantity={this.changeCartItemQuantity}
         />

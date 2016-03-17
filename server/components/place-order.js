@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section } from '../../playground/index';
-import * as Actions from '../../src/order/order-actions';
-import Address from '../../src/order/address/address';
-import Card from '../../src/order/card/card';
-import Customer from '../../src/order/customer/customer';
+import * as order from '../../src/order/order';
+import address from '../../src/order/address/address';
+import card from '../../src/order/card/card';
+import customer from '../../src/order/customer/customer';
 
 @PlaygroundComponent
 class PlaceOrder extends Component {
@@ -14,7 +14,7 @@ class PlaceOrder extends Component {
   static subscribe = 'order';
 
   convertCartToOrder = () => {
-    this.context.store.dispatch(Actions.convertCartToOrder(this.context.store.getState().cart));
+    order.convertCart(this.context.store.getState().cart);
   };
 
   validateOrder = () => {
@@ -57,42 +57,42 @@ class PlaceOrder extends Component {
         <Section>
           <Section.Items
             showTotals={['quantity', 'price', 'subtotal']}
-            items={this.state.state.items}
+            items={this.state.order.items}
           />
         </Section>
         <Section>
-          <Section.Param name="Items" value={this.state.state.items ? this.state.state.items.length : 0}/>
-          <Section.Param name="Subtotal" value={this.state.state.subtotal}/>
-          <Section.Param name="Total" value={this.state.state.total}/>
+          <Section.Param name="Items" value={this.state.order.items ? this.state.order.items.length : 0}/>
+          <Section.Param name="Subtotal" value={this.state.order.subtotal}/>
+          <Section.Param name="Total" value={this.state.order.total}/>
           <Section.Param
             name="user_id"
-            value={this.state.state.user_id}
-            onChange={(value) => { this.context.store.dispatch(Actions.updateOrder({ user_id: value })) }}
+            value={this.state.order.user_id}
+            onChange={(value) => { order.update({ user_id: value }) }}
           />
         </Section>
         <Section>
           <Section.Form
             name="Customer"
-            defaults={new Customer}
-            state={this.state.state.customer}
+            defaults={{...customer}}
+            state={this.state.order.customer}
             action={(state) => { this.context.store.dispatch(Actions.changeOrderCustomer(state)) }}
           />
           <Section.Form
             name="Shipping Address"
-            defaults={new Address}
-            state={this.state.state.shipping_address}
+            defaults={{...address}}
+            state={this.state.order.shipping_address}
             action={(state) => { this.context.store.dispatch(Actions.changeOrderShippingAddress(state)) }}
           />
           <Section.Form
             name="Billing Address"
-            defaults={new Address}
-            state={this.state.state.billing_address}
+            defaults={{...address}}
+            state={this.state.order.billing_address}
             action={(state) => { this.context.store.dispatch(Actions.changeOrderBillingAddress(state)) }}
           />
           <Section.Form
             name="Credit Card"
-            defaults={new Card}
-            state={this.state.state.card}
+            defaults={{...card}}
+            state={this.state.order.card}
             action={(state) => { this.context.store.dispatch(Actions.changeOrderCard(state)) }}
           />
         </Section>

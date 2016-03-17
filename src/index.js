@@ -12,7 +12,6 @@ export function store() {
     let nextStore = {
       ...store,
       dispatch(...args) {
-        console.log('dispatch');
         reduxStore.dispatch(...args);
         store.dispatch(...args);
         return args[0];
