@@ -1,6 +1,6 @@
 import React  from 'react';
 import ReactDOM from 'react-dom';
-import { compose, applyMiddleware, createStore, combineReducers } from 'redux';
+import { compose, applyMiddleware, createStore } from 'redux';
 import { logger } from '../playground/logger';
 import { Playground } from '../playground/index'
 import { store, config, getConfig } from '../src/index';

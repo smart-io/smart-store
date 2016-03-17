@@ -1,14 +1,21 @@
-import reduxStore, { setStore } from './app';
+import reduxStore, { initialSate, setStore } from './app';
+import reducers from './reducers';
 
 export function store() {
-  return next => (reducer, initialState, enhancer) => {
+  return next => (reducer, storeInitialState, enhancer) => {
     function nextReducer() {
       return function (state = {}, action) {
-        state = reducer(state, action);
-        return { ...state, ...reduxStore.getState() };
+        const { cart, order, orders, ...storeState } = state;
+        state = reducer(storeState, action);
+        state = {
+          ...state,
+          ...reducers({ cart: cart, order: order, orders: orders }, action)
+        };
+        return state;
       };
     }
-    let store = next(nextReducer(), initialState, enhancer);
+
+    let store = next(nextReducer(), { ...initialSate, ...storeInitialState }, enhancer);
     let nextStore = {
       ...store,
       dispatch(...args) {
