@@ -1,38 +1,9 @@
-class Address {
-  /**
-   * @type {Number}
-   */
-  id = null;
-
-  /**
-   * @type {String}
-   */
-  address1 = null;
-
-  /**
-   * @type {String}
-   */
-  address2 = null;
-
-  /**
-   * @type {String}
-   */
-  city = null;
-
-  /**
-   * @type {String}
-   */
-  region = null;
-
-  /**
-   * @type {String}
-   */
-  country = null;
-
-  /**
-   * @type {String}
-   */
-  postal_code = null;
+export default {
+  id: null,
+  address1: null,
+  address2: null,
+  city: null,
+  region: null,
+  country: null,
+  postal_code: null
 }
-
-export default Address;

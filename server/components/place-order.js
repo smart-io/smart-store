@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section } from '../../playground/index';
 import * as Actions from '../../src/order/order-actions';
-import Address from '../../src/address/address';
-import Card from '../../src/card/card';
-import Customer from '../../src/customer/customer';
+import Address from '../../src/order/address/address';
+import Card from '../../src/order/card/card';
+import Customer from '../../src/order/customer/customer';
 
 @PlaygroundComponent
 class PlaceOrder extends Component {
