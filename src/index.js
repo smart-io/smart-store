@@ -19,7 +19,6 @@ export function store() {
     let nextStore = {
       ...store,
       dispatch(...args) {
-        reduxStore.dispatch(...args);
         store.dispatch(...args);
         return args[0];
       },
@@ -34,13 +33,14 @@ export function store() {
 }
 
 let _config = { url: null };
-export function config(config, value) {
-  if (value !== undefined) {
-    let newConfig = {};
-    newConfig[config] = value;
-    config = newConfig;
+export function config(...args) {
+  let config = {};
+  if (args.length > 1) {
+    config[args[0]] = args[1];
+  } else {
+    config = args[0];
   }
-  _config = { ..._config, ...config };
+  _config = { ...config };
 }
 
 export function getConfig() {

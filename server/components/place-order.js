@@ -81,13 +81,13 @@ class PlaceOrder extends Component {
             name="Shipping Address"
             defaults={{...address}}
             state={this.state.order.shipping_address}
-            action={(state) => { this.context.store.dispatch(Actions.changeOrderShippingAddress(state)) }}
+            action={(state) => { order.changeShippingAddress(state) }}
           />
           <Section.Form
             name="Billing Address"
             defaults={{...address}}
             state={this.state.order.billing_address}
-            action={(state) => { this.context.store.dispatch(Actions.changeOrderBillingAddress(state)) }}
+            action={(state) => { order.changeBillingAddress(state) }}
           />
           <Section.Form
             name="Credit Card"

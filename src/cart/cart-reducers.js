@@ -1,10 +1,10 @@
 import * as actions from './cart-actions';
 import Cart from './cart';
-import Item from '../order/items/item';
+import item from '../order/items/item';
 import { calculateItemSubtotal } from '../accounting/accounting';
 
 function addItem(cart, item) {
-  item = { ...new Item, ...calculateItemSubtotal(item) };
+  item = { ...item, ...calculateItemSubtotal(item) };
   let items = [ ...cart.items ];
   let updateItem = false;
   for (var i = 0, len = items.length; i < len; ++i) {
@@ -34,7 +34,7 @@ function removeItem(cart, index) {
 }
 
 function changeItemQuantity(cart, index, quantity) {
-  let item = { ...new Item, ...cart.items[index], quantity: parseInt(quantity) };
+  let item = { ...item, ...cart.items[index], quantity: parseInt(quantity) };
   item = calculateItemSubtotal(item);
 
   return {
@@ -52,7 +52,6 @@ export default function(state = {}, action) {
   case actions.ADD_CART_ITEM:
     state = addItem(state, action.item);
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
-    console.log(state);
     return state;
 
   case actions.CHANGE_CART_ITEM_QUANTITY:
