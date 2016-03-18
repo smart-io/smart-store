@@ -14,13 +14,15 @@ function removeTax(state, index) {
 
 function resetTaxes(taxes) {
   let state = [];
-  for (let i = 0, len = taxes.length; i < len; ++i) {
-    state.push({ ...taxDefault, ...taxes[i] });
+  if (taxes && taxes.length) {
+    for (let i = 0, len = taxes.length; i < len; ++i) {
+      state.push({ ...taxDefault, ...taxes[i] });
+    }
   }
   return state;
 }
 
-export default function(state = {}, action) {
+export default function(state = [], action) {
   switch (action.type) {
   case actions.ADD_TAX:
     return addTax(state, action.tax);
