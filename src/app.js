@@ -14,6 +14,7 @@ try {
 }
 initialSate.order = { ...order };
 initialSate.orders = [...new Orders().items];
+initialSate.taxes = [];
 
 let store = compose(
   applyMiddleware(thunkMiddleware)
