@@ -18,9 +18,11 @@ function changeAddress(state, kind, data) {
 
 export default function(state = {}, action) {
   switch (action.type) {
-  case actions.CHANGE_ORDER_ADDRESS:
-    state = changeAddress(state, action.kind, action.data);
-    return state;
+  case actions.CHANGE_ORDER_BILLING_ADDRESS:
+    return changeAddress(state, 'billing', action.data);
+
+  case actions.CHANGE_ORDER_SHIPPING_ADDRESS:
+    return changeAddress(state, 'shipping', action.data);
 
   default:
     return state;

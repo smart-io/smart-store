@@ -1,25 +1,17 @@
-import { dispatch } from '../app';
-import * as order from './order-actions';
+import * as orderActions from './order-actions';
+import * as addressActions from './address/address-actions';
+import * as itemsActions from '../items/items-actions';
 import address from './address/address';
 import customer from './customer/customer';
 import card from './card/card';
-import * as addressActions from './address/address-actions';
 
-export function convertCart(cart) {
-  return dispatch(order.convertCartToOrder(cart));
-}
-
-export function update(data) {
-  return dispatch(order.updateOrder(data));
-}
-
-export function changeBillingAddress(address) {
-  return dispatch(addressActions.changeOrderAddress('billing', address));
-}
-
-export function changeShippingAddress(address) {
-  return dispatch(addressActions.changeOrderAddress('shipping', address));
-}
+export const convertCart = cart => orderActions.convertCartToOrder(cart);
+export const update = data => orderActions.updateOrder(data);
+export const changeBillingAddress = address => addressActions.changeOrderBillingAddress(address);
+export const changeShippingAddress = address => addressActions.changeOrderShippingAddress(address);
+export const addItem = item => itemsActions.addCartItem(item);
+export const removeItem = index => itemsActions.removeCartItem(index);
+export const changeItemQuantity = (index, quantity) => itemsActions.changeCartItemQuantity(index, quantity);
 
 export default {
   id: null,

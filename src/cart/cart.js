@@ -1,22 +1,10 @@
-import store, { dispatch } from '../app';
-import Item from '../order/items/item';
 import * as actions from './cart-actions';
+import * as itemsActions from '../items/items-actions';
 
-export function addItem(item) {
-  return dispatch(actions.addCartItem(item));
-}
-
-export function emptyCart() {
-  return dispatch(actions.emptyCart());
-}
-
-export function removeItem(index) {
-  return dispatch(actions.removeCartItem(index));
-}
-
-export function changeItemQuantity(index, quantity) {
-  return dispatch(actions.changeCartItemQuantity(index, quantity));
-}
+export const addItem = item => itemsActions.addCartItem(item);
+export const emptyCart = () => actions.emptyCart();
+export const removeItem = index => itemsActions.removeCartItem(index);
+export const changeItemQuantity = (index, quantity) => itemsActions.changeCartItemQuantity(index, quantity);
 
 export default {
   items: []

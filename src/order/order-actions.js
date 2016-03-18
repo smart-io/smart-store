@@ -1,5 +1,6 @@
 import OrderValidator from './order-validator';
-import Store from '../index';
+import {getConfig} from '../index';
+import {dispatch, getState} from '../app';
 import Request from '../request';
 
 export const UPDATE_ORDER = 'UPDATE_ORDER';
@@ -11,71 +12,45 @@ export const VALIDATE_ORDER = 'VALIDATE_ORDER';
 export const ORDER_VALIDATED = 'ORDER_VALIDATED';
 export const ORDER_EXCEPTIONS = 'ORDER_EXCEPTIONS';
 
-export function updateOrder(data) {
-  return { type: UPDATE_ORDER, data: data };
-}
+export const updateOrder = data => dispatch({ type: UPDATE_ORDER, data });
+export const convertCartToOrder = cart => dispatch({ type: CONVERT_CART_TO_ORDER, cart });
+export const requestCreateOrder = () => dispatch({ type: REQUEST_CREATE_ORDER });
+export const receiveOrder = data => dispatch({ type: RECEIVE_ORDER, data });
+export const receiveOrderExcpetion = (errors) => dispatch({ type: RECEIVE_ORDER_EXCEPTION, errors });
+export const orderExceptions = errors => dispatch({ type: ORDER_EXCEPTIONS, errors: errors });
 
-export function convertCartToOrder(cart) {
-  return { type: CONVERT_CART_TO_ORDER, cart: cart };
-}
+const dispatchValidateOrder = () => dispatch({ type: VALIDATE_ORDER });
+const orderValidated = () => dispatch({ type: ORDER_VALIDATED });
 
-export function requestCreateOrder() {
-  return { type: REQUEST_CREATE_ORDER };
-}
+export const validateOrder = () => () => {
+  dispatchValidateOrder();
 
-export function receiveOrder(data) {
-  return { type: RECEIVE_ORDER, data: data };
-}
+  return new Promise((resolve, reject) => {
+    if (OrderValidator.assert(getState().order)) {
+      orderValidated();
+      resolve();
+    } else {
+      const errors = OrderValidator.validate(getState().order);
+      orderExceptions(errors);
+      reject(errors);
+    }
+  });
+};
 
-export function receiveOrderExcpetion(errors) {
-  return { type: RECEIVE_ORDER_EXCEPTION, errors: errors };
-}
+export const placeOrder = () => () => {
+  requestCreateOrder();
 
-function dispatchValidateOrder() {
-  return { type: VALIDATE_ORDER };
-}
-
-function orderValidated() {
-  return { type: ORDER_VALIDATED };
-}
-
-export function orderExcpetions(errors) {
-  return { type: ORDER_EXCEPTIONS, errors: errors };
-}
-
-export function validateOrder() {
-  return function(dispatch, getState) {
-    dispatch(dispatchValidateOrder());
-
-    return new Promise(function(resolve, reject) {
-      if (OrderValidator.assert(getState().order)) {
-        dispatch(orderValidated());
-        resolve();
-      } else {
-        const errors = OrderValidator.validate(getState().order);
-        dispatch(orderExcpetions(errors));
-        reject(errors);
-      }
-    });
-  }
-}
-
-export function placeOrder() {
-  return function(dispatch, getState) {
-    dispatch(requestCreateOrder());
-
-    return new Request({
-      url: `${Store.url}/order`,
-      method: 'POST',
-      data: getState().order
+  return new Request({
+    url: `${getConfig().url}/order`,
+    method: 'POST',
+    data: getState().order
+  })
+    .then(function (data) {
+      receiveOrder(data);
+      return Promise.resolve(data);
     })
-      .then(function (data) {
-        dispatch(receiveOrder(data));
-        return Promise.resolve(data);
-      })
-      .catch(function (data) {
-        dispatch(receiveOrderExcpetion(data));
-        return Promise.reject(data);
-      });
-  }
-}
+    .catch(function (data) {
+      receiveOrderExcpetion(data);
+      return Promise.reject(data);
+    });
+};
