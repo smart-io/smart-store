@@ -29,6 +29,19 @@ class PlaceOrder extends Component {
       .catch(function (ee) { console.log(ee, 'not ok'); })
   };
 
+  removeItem = (index) => {
+    if (index === undefined) {
+      index = prompt('Cart item index');
+    }
+    order.removeItem(index);
+  };
+
+  changeItemQuantity = (index) => {
+    const quantity = prompt('New quantity');
+    order.changeItemQuantity(index, quantity);
+  };
+
+
   actions = {
     convertCartToOrder: this.convertCartToOrder,
     validateOrder: this.validateOrder,
@@ -58,6 +71,8 @@ class PlaceOrder extends Component {
           <Section.Items
             showTotals={['quantity', 'price', 'subtotal']}
             items={this.state.order.items}
+            removeCartItem={this.removeItem}
+            changeCartItemQuantity={this.changeItemQuantity}
           />
         </Section>
         <Section>

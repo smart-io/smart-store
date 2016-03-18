@@ -9,9 +9,9 @@ export const convertCart = cart => orderActions.convertCartToOrder(cart);
 export const update = data => orderActions.updateOrder(data);
 export const changeBillingAddress = address => addressActions.changeOrderBillingAddress(address);
 export const changeShippingAddress = address => addressActions.changeOrderShippingAddress(address);
-export const addItem = item => itemsActions.addCartItem(item);
-export const removeItem = index => itemsActions.removeCartItem(index);
-export const changeItemQuantity = (index, quantity) => itemsActions.changeCartItemQuantity(index, quantity);
+export const addItem = item => itemsActions.addOrderItem(item);
+export const removeItem = index => itemsActions.removeOrderItem(index);
+export const changeItemQuantity = (index, quantity) => itemsActions.changeOrderItemQuantity(index, quantity);
 
 export default {
   id: null,

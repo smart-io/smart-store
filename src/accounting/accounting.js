@@ -1,4 +1,5 @@
 export function calculateItemSubtotal(item) {
+  console.log(item);
   return {
     ...item,
     subtotal: item.price * item.quantity

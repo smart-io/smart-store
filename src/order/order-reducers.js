@@ -25,7 +25,7 @@ export default function order(state = {}, action) {
   case itemsActions.CHANGE_ORDER_ITEM_QUANTITY:
   case itemsActions.REMOVE_ORDER_ITEM:
   case itemsActions.RESET_ORDER_ITEMS:
-    return items(state, action);
+    return calculateOrderAmounts(items(state, action));
 
   case actions.RECEIVE_ORDER:
   case actions.UPDATE_ORDER:
