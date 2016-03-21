@@ -92,25 +92,25 @@ class PlaceOrder extends Component {
             name="Customer"
             defaults={{...customer}}
             state={this.state.order.customer}
-            action={(state) => { this.context.store.dispatch(Actions.changeOrderCustomer(state)) }}
+            action={(state) => { order.updateCustomer(state) }}
           />
           <Section.Form
             name="Shipping Address"
             defaults={{...address}}
             state={this.state.order.shipping_address}
-            action={(state) => { order.changeShippingAddress(state) }}
+            action={(state) => { order.updateShippingAddress(state) }}
           />
           <Section.Form
             name="Billing Address"
             defaults={{...address}}
             state={this.state.order.billing_address}
-            action={(state) => { order.changeBillingAddress(state) }}
+            action={(state) => { order.updateBillingAddress(state) }}
           />
           <Section.Form
             name="Credit Card"
             defaults={{...card}}
             state={this.state.order.card}
-            action={(state) => { this.context.store.dispatch(Actions.changeOrderCard(state)) }}
+            action={(state) => { order.updateCard(state) }}
           />
         </Section>
       </View>

@@ -1,5 +1,5 @@
-export const CHANGE_ORDER_CARD = 'CHANGE_CARD';
+import { dispatch } from '../../app';
 
-export function changeOrderCard(data) {
-  return { type: CHANGE_ORDER_CARD, data: data };
-}
+export const UPDATE_ORDER_CARD = 'UPDATE_ORDER_CARD';
+
+export const updateOrderCard = card => dispatch({ type: UPDATE_ORDER_CARD, card });

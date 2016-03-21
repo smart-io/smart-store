@@ -4,7 +4,7 @@ import * as itemsActions from '../items/items-actions';
 import defaultOrder from './order';
 import address from './address/address-reducers';
 import card from './card/card-reducers';
-import customer from './card/card-reducers';
+import customer from './customer/customer-reducers';
 import items from '../items/items-reducers';
 import taxes from '../taxes/taxes-reducers';
 import { calculateOrderAmounts } from '../accounting/accounting';
