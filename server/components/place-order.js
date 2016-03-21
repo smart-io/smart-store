@@ -18,7 +18,7 @@ class PlaceOrder extends Component {
   };
 
   validateOrder = () => {
-    this.context.store.dispatch(Actions.validateOrder(this.context.store.getState().order))
+    order.validate(this.context.store.getState().order)
       .then(() => { this.setState({ validMessage: 'Order is valid', errors: null })})
       .catch((errors) => { this.setState({ validMessage: null, errors: errors })})
   };

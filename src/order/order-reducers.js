@@ -45,6 +45,9 @@ export default function order(state = {}, action) {
     state = convertCartToOrder(state, action.cart);
     return state;
 
+  case actions.CHANGE_ORDER_CURRENCY:
+    return { ...defaultOrder, ...state, currency: action.currency };
+
   case taxesActions.ADD_TAX:
   case taxesActions.REMOVE_TAX:
   case taxesActions.RESET_TAXES:

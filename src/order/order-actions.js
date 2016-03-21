@@ -4,6 +4,7 @@ import {dispatch, getState} from '../app';
 import Request from '../request';
 
 export const UPDATE_ORDER = 'UPDATE_ORDER';
+export const CHANGE_ORDER_CURRENCY = 'CHANGE_ORDER_CURRENCY';
 export const CONVERT_CART_TO_ORDER = 'CONVERT_CART_TO_ORDER';
 export const REQUEST_CREATE_ORDER = 'REQUEST_CREATE_ORDER';
 export const RECEIVE_ORDER = 'RECEIVE_ORDER';
@@ -14,6 +15,7 @@ export const ORDER_EXCEPTIONS = 'ORDER_EXCEPTIONS';
 export const RESET_ORDER_TAXES = 'RESET_ORDER_TAXES';
 
 export const updateOrder = order => dispatch({ type: UPDATE_ORDER, order });
+export const changeCurrency = currency => dispatch({ type: CHANGE_ORDER_CURRENCY, currency });
 export const convertCartToOrder = cart => dispatch({ type: CONVERT_CART_TO_ORDER, cart });
 export const requestCreateOrder = () => dispatch({ type: REQUEST_CREATE_ORDER });
 export const receiveOrder = order => dispatch({ type: RECEIVE_ORDER, order });
@@ -24,15 +26,15 @@ export const resetOrderTaxes = taxes => dispatch({ type: RESET_ORDER_TAXES, taxe
 const dispatchValidateOrder = () => dispatch({ type: VALIDATE_ORDER });
 const orderValidated = () => dispatch({ type: ORDER_VALIDATED });
 
-export const validateOrder = () => () => {
+export const validateOrder = (order) => {
   dispatchValidateOrder();
 
   return new Promise((resolve, reject) => {
-    if (OrderValidator.assert(getState().order)) {
+    if (OrderValidator.assert(order)) {
       orderValidated();
       resolve();
     } else {
-      const errors = OrderValidator.validate(getState().order);
+      const errors = OrderValidator.validate(order);
       orderExceptions(errors);
       reject(errors);
     }
