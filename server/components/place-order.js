@@ -71,13 +71,15 @@ class PlaceOrder extends Component {
           <Section.Items
             showTotals={['quantity', 'price', 'subtotal']}
             items={this.state.order.items}
-            removeCartItem={this.removeItem}
-            changeCartItemQuantity={this.changeItemQuantity}
+            removeItem={this.removeItem}
+            changeItemQuantity={this.changeItemQuantity}
           />
         </Section>
         <Section>
           <Section.Param name="Items" value={this.state.order.items ? this.state.order.items.length : 0}/>
           <Section.Param name="Subtotal" value={this.state.order.subtotal}/>
+          <Section.Param name="Fees" total={[this.state.order.fees, 'amount']}/>
+          <Section.Param name="Taxes" total={[this.state.order.taxes, 'amount']}/>
           <Section.Param name="Total" value={this.state.order.total}/>
           <Section.Param
             name="user_id"

@@ -38,7 +38,8 @@ const styles = {
 class Param extends Component {
   static propTypes = {
     name: PropTypes.string,
-    value: PropTypes.any
+    value: PropTypes.any,
+    total: PropTypes.array
   };
 
   change = (name) => {
@@ -67,7 +68,17 @@ class Param extends Component {
     }
 
     let value;
-    if (this.props.value === undefined || this.props.value === null) {
+    if (this.props.total) {
+      value = 0;
+      for (let i = 0, len = this.props.total[0].length; i < len; ++i) {
+        value += this.props.total[0][i][this.props.total[1]];
+      }
+      value = (
+        <span style={styles.value}>
+          {value}
+        </span>
+      );
+    } else if (this.props.value === undefined || this.props.value === null) {
       value = (
         <span style={styles.valueNull}>
           NULL

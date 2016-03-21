@@ -48,6 +48,7 @@ class Cart extends Component {
         />
         <Section>
           <Section.Param name="Subtotal" value={this.state.cart.subtotal}/>
+          <Section.Param name="Taxes" total={[this.state.cart.taxes, 'amount']}/>
           <Section.Param name="Total" value={this.state.cart.total}/>
         </Section>
         <Ui.Modal ref="modal">
