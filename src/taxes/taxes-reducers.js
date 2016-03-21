@@ -1,5 +1,4 @@
 import * as taxesActions from './taxes-actions';
-import * as orderActions from '../order/order-actions';
 import taxDefault from './tax';
 
 function addTax(state, tax) {

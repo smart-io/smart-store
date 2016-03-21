@@ -1,6 +1,5 @@
 import OrderValidator from './order-validator';
-import {getConfig} from '../index';
-import {dispatch, getState} from '../app';
+import {dispatch} from '../app';
 import Request from '../request';
 
 export const UPDATE_ORDER = 'UPDATE_ORDER';

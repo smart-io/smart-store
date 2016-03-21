@@ -23,13 +23,13 @@ module.exports = {
   devtool: DEV ? 'source-map' : false,
 
   module: {
-    /*preLoaders: [
+    preLoaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'eslint-loader'
       }
-    ],*/
+    ],
     loaders: [
       {
         test: /\.(js)$/,

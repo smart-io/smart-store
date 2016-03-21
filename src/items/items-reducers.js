@@ -1,6 +1,5 @@
 import * as actions from './items-actions';
 import { calculateItemSubtotal } from '../accounting/accounting';
-import item from '../items/item';
 
 function addItem(state, item) {
   item = { ...item, ...calculateItemSubtotal(item) };
