@@ -1,5 +1,5 @@
-export const CHANGE_ORDER_CUSTOMER = 'CHANGE_ORDER_CUSTOMER';
+import { dispatch } from '../../app';
 
-export function changeOrderCustomer(data) {
-  return { type: CHANGE_ORDER_CUSTOMER, data: data };
-}
+export const UPDATE_ORDER_CUSTOMER = 'UPDATE_ORDER_CUSTOMER';
+
+export const updateOrderCustomer = customer => dispatch({ type: UPDATE_ORDER_CUSTOMER, customer });

@@ -13,10 +13,10 @@ export const ORDER_VALIDATED = 'ORDER_VALIDATED';
 export const ORDER_EXCEPTIONS = 'ORDER_EXCEPTIONS';
 export const RESET_ORDER_TAXES = 'RESET_ORDER_TAXES';
 
-export const updateOrder = data => dispatch({ type: UPDATE_ORDER, data });
+export const updateOrder = order => dispatch({ type: UPDATE_ORDER, order });
 export const convertCartToOrder = cart => dispatch({ type: CONVERT_CART_TO_ORDER, cart });
 export const requestCreateOrder = () => dispatch({ type: REQUEST_CREATE_ORDER });
-export const receiveOrder = data => dispatch({ type: RECEIVE_ORDER, data });
+export const receiveOrder = order => dispatch({ type: RECEIVE_ORDER, order });
 export const receiveOrderExcpetion = errors => dispatch({ type: RECEIVE_ORDER_EXCEPTION, errors });
 export const orderExceptions = errors => dispatch({ type: ORDER_EXCEPTIONS, errors });
 export const resetOrderTaxes = taxes => dispatch({ type: RESET_ORDER_TAXES, taxes });

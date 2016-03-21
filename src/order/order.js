@@ -1,14 +1,16 @@
 import * as orderActions from './order-actions';
 import * as addressActions from './address/address-actions';
 import * as itemsActions from '../items/items-actions';
+import * as customerActions from './customer/customer-actions';
 import address from './address/address';
 import customer from './customer/customer';
 import card from './card/card';
 
 export const convertCart = cart => orderActions.convertCartToOrder(cart);
-export const update = data => orderActions.updateOrder(data);
-export const changeBillingAddress = address => addressActions.changeOrderBillingAddress(address);
-export const changeShippingAddress = address => addressActions.changeOrderShippingAddress(address);
+export const update = order => orderActions.updateOrder(order);
+export const updateCustomer = customer => customerActions.updateOrderCustomer(customer);
+export const updateBillingAddress = address => addressActions.updateOrderBillingAddress(address);
+export const updateShippingAddress = address => addressActions.updateOrderShippingAddress(address);
 export const addItem = item => itemsActions.addOrderItem(item);
 export const removeItem = index => itemsActions.removeOrderItem(index);
 export const changeItemQuantity = (index, quantity) => itemsActions.changeOrderItemQuantity(index, quantity);

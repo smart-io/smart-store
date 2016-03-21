@@ -39,7 +39,7 @@ export default function order(state = {}, action) {
 
   case actions.RECEIVE_ORDER:
   case actions.UPDATE_ORDER:
-    return { ...defaultOrder, ...state, ...action.data };
+    return { ...defaultOrder, ...state, ...action.order };
 
   case actions.CONVERT_CART_TO_ORDER:
     state = convertCartToOrder(state, action.cart);
