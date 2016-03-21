@@ -24,7 +24,7 @@ class PlaceOrder extends Component {
   };
 
   placeOrder = () => {
-    this.context.store.dispatch(Actions.placeOrder(this.context.store.getState().order))
+    order.place(this.context.store.getState().order)
       .then(function () { console.log('ok'); })
       .catch(function (ee) { console.log(ee, 'not ok'); })
   };

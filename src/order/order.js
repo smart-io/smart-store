@@ -9,6 +9,7 @@ import card from './card/card';
 
 export const update = order => orderActions.updateOrder(order);
 export const validate = order => orderActions.validateOrder(order);
+export const place = order => orderActions.placeOrder(order);
 export const convertCart = cart => orderActions.convertCartToOrder(cart);
 export const changeCurrency = currency => orderActions.changeCurrency(currency);
 export const updateCustomer = customer => customerActions.updateOrderCustomer(customer);

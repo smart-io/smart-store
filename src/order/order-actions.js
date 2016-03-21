@@ -26,7 +26,7 @@ export const resetOrderTaxes = taxes => dispatch({ type: RESET_ORDER_TAXES, taxe
 const dispatchValidateOrder = () => dispatch({ type: VALIDATE_ORDER });
 const orderValidated = () => dispatch({ type: ORDER_VALIDATED });
 
-export const validateOrder = (order) => {
+export const validateOrder = order => {
   dispatchValidateOrder();
 
   return new Promise((resolve, reject) => {
@@ -41,13 +41,13 @@ export const validateOrder = (order) => {
   });
 };
 
-export const placeOrder = () => () => {
+export const placeOrder = order => {
   requestCreateOrder();
 
   return new Request({
-    url: `${getConfig().url}/order`,
+    url: '/order',
     method: 'POST',
-    data: getState().order
+    data: order
   })
     .then(function (data) {
       receiveOrder(data);

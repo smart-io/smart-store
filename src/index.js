@@ -32,7 +32,11 @@ export function store() {
   };
 }
 
-let _config = { url: null };
+let _config = {
+  url: null,
+  session: null
+};
+
 export function config(...args) {
   let config = {};
   if (args.length > 1) {

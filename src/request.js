@@ -1,4 +1,4 @@
-import App from './index';
+import { getConfig } from './index';
 import fetch from 'isomorphic-fetch';
 
 function checkStatus(response) {
@@ -45,9 +45,12 @@ export default class Request {
         options.body = JSON.stringify(options.data);
         delete options.data;
       }
-      if (App.session) {
+      if (getConfig().url) {
+        url = getConfig().url + url;
+      }
+      if (getConfig().session) {
         options.headers = {
-          'X-Session': App.session
+          'X-Session': getConfig().session
         };
       }
       Request.trigger('fetch', { url: url, ...options });
