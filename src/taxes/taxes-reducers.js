@@ -1,15 +1,18 @@
-import * as actions from './taxes-actions';
+import * as taxesActions from './taxes-actions';
+import * as orderActions from '../order/order-actions';
 import taxDefault from './tax';
 
 function addTax(state, tax) {
-  return [ ...state, { ...taxDefault, ...tax } ];
+  state = [ ...state, { ...taxDefault, ...tax } ];
+  return state;
 }
 
 function removeTax(state, index) {
-  return [
+  state = [
     ...state.slice(0, index),
     ...state.slice(index + 1)
   ];
+  return state;
 }
 
 function resetTaxes(taxes) {
@@ -24,13 +27,13 @@ function resetTaxes(taxes) {
 
 export default function(state = [], action) {
   switch (action.type) {
-  case actions.ADD_TAX:
+  case taxesActions.ADD_TAX:
     return addTax(state, action.tax);
 
-  case actions.REMOVE_TAX:
+  case taxesActions.REMOVE_TAX:
     return removeTax(state, action.index);
 
-  case actions.RESET_TAXES:
+  case taxesActions.RESET_TAXES:
     return resetTaxes(action.index);
 
   default:

@@ -46,6 +46,10 @@ class Cart extends Component {
           removeCartItem={this.removeCartItem}
           changeCartItemQuantity={this.changeCartItemQuantity}
         />
+        <Section>
+          <Section.Param name="Subtotal" value={this.state.cart.subtotal}/>
+          <Section.Param name="Total" value={this.state.cart.total}/>
+        </Section>
         <Ui.Modal ref="modal">
           <Section.Form
             name="Item"

@@ -1,10 +1,12 @@
 import * as actions from './order-actions';
+import * as taxesActions from '../taxes/taxes-actions';
 import * as itemsActions from '../items/items-actions';
 import defaultOrder from './order';
 import address from './address/address-reducers';
 import card from './card/card-reducers';
 import customer from './card/card-reducers';
 import items from '../items/items-reducers';
+import taxes from '../taxes/taxes-reducers';
 import { calculateOrderAmounts } from '../accounting/accounting';
 
 function convertCartToOrder(order, cart) {
@@ -12,6 +14,14 @@ function convertCartToOrder(order, cart) {
     ...defaultOrder,
     ...order,
     items: [...cart.items]
+  });
+}
+
+function resetTaxes(state, taxes) {
+  return calculateOrderAmounts({
+    ...defaultOrder,
+    ...state,
+    taxes: [...taxes]
   });
 }
 
@@ -34,6 +44,11 @@ export default function order(state = {}, action) {
   case actions.CONVERT_CART_TO_ORDER:
     state = convertCartToOrder(state, action.cart);
     return state;
+
+  case taxesActions.ADD_TAX:
+  case taxesActions.REMOVE_TAX:
+  case taxesActions.RESET_TAXES:
+    return resetTaxes(state, taxes(state.taxes, action));
 
   default:
     return state;
