@@ -1,4 +1,4 @@
-import { dispatch } from '../app';
+import {dispatch} from '../app';
 
 export const EMPTY_CART = 'EMPTY_CART';
 

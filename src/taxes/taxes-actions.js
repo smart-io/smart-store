@@ -1,4 +1,4 @@
-import { dispatch } from '../app';
+import {dispatch} from '../app';
 
 export const ADD_TAX = 'ADD_TAX';
 export const REMOVE_TAX = 'REMOVE_TAX';

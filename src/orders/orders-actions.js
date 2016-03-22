@@ -38,7 +38,7 @@ export function receiveSingleOrder(data) {
 }
 
 export function fetchOrders() {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch(requestFetchOrders());
 
     return new Request({
@@ -57,7 +57,7 @@ export function fetchOrders() {
 }
 
 export function fetchAllOrders() {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch(requestFetchAllOrders());
 
     return new Request({
@@ -76,7 +76,7 @@ export function fetchAllOrders() {
 }
 
 export function shipOrder(order) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch(dispatchShipOrder(order));
 
     return new Request({

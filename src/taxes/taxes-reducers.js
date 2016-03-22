@@ -1,8 +1,8 @@
 import * as taxesActions from './taxes-actions';
-import taxDefault from './tax';
+import {defaultTax} from './tax';
 
 function addTax(state, tax) {
-  state = [ ...state, { ...taxDefault, ...tax } ];
+  state = [...state, { ...defaultTax, ...tax }];
   return state;
 }
 
@@ -18,13 +18,13 @@ function resetTaxes(taxes) {
   let state = [];
   if (taxes && taxes.length) {
     for (let i = 0, len = taxes.length; i < len; ++i) {
-      state.push({ ...taxDefault, ...taxes[i] });
+      state.push({ ...defaultTax, ...taxes[i] });
     }
   }
   return state;
 }
 
-export default function(state = [], action) {
+export default function (state = [], action) {
   switch (action.type) {
   case taxesActions.ADD_TAX:
     return addTax(state, action.tax);

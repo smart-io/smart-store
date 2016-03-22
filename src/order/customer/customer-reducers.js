@@ -1,5 +1,5 @@
-import defaultOrder from '../order';
-import defaultCustomer from './customer';
+import {defaultOrder} from '../order';
+import {defaultCustomer} from './customer';
 import * as actions from './customer-actions';
 
 export default function (state = {}, action) {

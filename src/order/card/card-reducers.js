@@ -1,5 +1,5 @@
-import defaultOrder from '../order';
-import defaultCard from './card';
+import {defaultOrder} from '../order';
+import {defaultCard} from './card';
 import * as actions from './card-actions';
 
 export default function (state = {}, action) {

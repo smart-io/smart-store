@@ -1,4 +1,4 @@
-import { getConfig } from './index';
+import {getConfig} from './index';
 import fetch from 'isomorphic-fetch';
 
 function checkStatus(response) {
@@ -35,11 +35,13 @@ export default class Request {
     if (!Request.events[event]) {
       Request.events[event] = [];
     }
-    Request.events[event].forEach((callback) => { callback(data); });
+    Request.events[event].forEach((callback) => {
+      callback(data);
+    });
   }
 
   constructor(request) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       let { url, ...options } = request;
       if (options.data) {
         options.body = JSON.stringify(options.data);

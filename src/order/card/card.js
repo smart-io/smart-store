@@ -1,4 +1,4 @@
-export default {
+export const defaultCard = {
   id: null,
   name: null,
   number: null,

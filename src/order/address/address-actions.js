@@ -1,4 +1,4 @@
-import { dispatch } from '../../app';
+import {dispatch} from '../../app';
 
 export const UPDATE_ORDER_BILLING_ADDRESS = 'UPDATE_ORDER_BILLING_ADDRESS';
 export const UPDATE_ORDER_SHIPPING_ADDRESS = 'UPDATE_ORDER_SHIPPING_ADDRESS';

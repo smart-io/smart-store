@@ -1,4 +1,4 @@
-export default {
+export const defaultItem = {
   id: null,
   code: null,
   name: null,

@@ -1,9 +1,10 @@
 import * as actions from './items-actions';
-import { calculateItemSubtotal } from '../accounting/accounting';
+import {defaultItem} from './item';
+import {calculateItemSubtotal} from '../accounting/accounting';
 
 function addItem(state, item) {
-  item = { ...item, ...calculateItemSubtotal(item) };
-  let items = [ ...state.items ];
+  item = { ...defaultItem, ...calculateItemSubtotal(item) };
+  let items = [...state.items];
   let updateItem = false;
   for (var i = 0, len = items.length; i < len; ++i) {
     if (items[i].code === item.code) {
@@ -32,7 +33,7 @@ function removeItem(state, index) {
 }
 
 function changeItemQuantity(state, index, quantity) {
-  let item = { ...item, ...state.items[index], quantity: parseInt(quantity) };
+  let item = { ...defaultItem, ...state.items[index], quantity: parseInt(quantity) };
   item = calculateItemSubtotal(item);
 
   return {
@@ -45,7 +46,7 @@ function changeItemQuantity(state, index, quantity) {
   };
 }
 
-export default function(state = [], action) {
+export default function (state = [], action) {
   switch (action.type) {
   case actions.RESET_CART_ITEMS:
   case actions.RESET_ORDER_ITEMS:
@@ -58,14 +59,11 @@ export default function(state = [], action) {
   case actions.REMOVE_CART_ITEM:
   case actions.REMOVE_ORDER_ITEM:
     return removeItem(state, action.index);
-    break;
 
   case actions.CHANGE_CART_ITEM_QUANTITY:
   case actions.CHANGE_ORDER_ITEM_QUANTITY:
     return changeItemQuantity(state, action.index, action.quantity);
-    break;
 
-    break;
   default:
     return state;
   }

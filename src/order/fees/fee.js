@@ -1,7 +1,4 @@
-class Tax {
-  name = null;
-  rate = null;
-  compound = null;
-}
-
-export default Tax;
+export const defaultFee = {
+  name: null,
+  amount: 0
+};

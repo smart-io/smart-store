@@ -1,19 +1,17 @@
-import { compose, createStore, applyMiddleware } from 'redux';
+import {compose, createStore, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import reducers from './reducers';
-import cart from './cart/cart';
-import order from './order/order';
-import Orders from './orders/orders';
+import {defaultCart} from './cart/cart';
+import {defaultOrder} from './order/order';
 
 let initialSate = {};
 try {
   if (localStorage) initialSate.cart = JSON.parse(localStorage['cart']);
-  else initialSate.cart = { ...cart };
+  else initialSate.cart = { ...defaultCart };
 } catch (e) {
-  initialSate.cart = { ...cart };
+  initialSate.cart = { ...defaultCart };
 }
-initialSate.order = { ...order };
-initialSate.orders = [...new Orders().items];
+initialSate.order = { ...defaultOrder };
 initialSate.taxes = [];
 
 let store = compose(
@@ -24,7 +22,7 @@ let getState = store.getState;
 let subscribe = store.subscribe;
 
 export default store;
-export { dispatch, getState, subscribe, initialSate };
+export {dispatch, getState, subscribe, initialSate};
 export function setStore(newStore) {
   store = newStore;
   dispatch = newStore.dispatch;

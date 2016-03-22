@@ -6,7 +6,8 @@ export const emptyCart = () => actions.emptyCart();
 export const removeItem = index => itemsActions.removeCartItem(index);
 export const changeItemQuantity = (index, quantity) => itemsActions.changeCartItemQuantity(index, quantity);
 
-export default {
+export const defaultCart = {
   items: [],
-  taxes: []
-}
+  taxes: [],
+  fees: []
+};

@@ -1,5 +1,5 @@
-import defaultOrder from '../order';
-import defaultAddress from './address';
+import {defaultOrder} from '../order';
+import {defaultAddress} from './address';
 import * as actions from './address-actions';
 
 function changeAddress(state, kind, data) {
@@ -9,14 +9,18 @@ function changeAddress(state, kind, data) {
   };
 
   switch (kind) {
-  case 'shipping': state.shipping_address = { ...defaultAddress, ...data }; break;
-  case 'billing': state.billing_address = { ...defaultAddress, ...data }; break;
+  case 'shipping':
+    state.shipping_address = { ...defaultAddress, ...data };
+    break;
+  case 'billing':
+    state.billing_address = { ...defaultAddress, ...data };
+    break;
   }
 
   return state;
 }
 
-export default function(state = {}, action) {
+export default function (state = {}, action) {
   switch (action.type) {
   case actions.UPDATE_ORDER_BILLING_ADDRESS:
     return changeAddress(state, 'billing', action.data);

@@ -1,4 +1,4 @@
-import { store, dispatch } from '../app';
+import {store, dispatch} from '../app';
 import * as Actions from './orders-actions';
 
 class Orders {

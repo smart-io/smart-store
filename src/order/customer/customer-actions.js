@@ -1,4 +1,4 @@
-import { dispatch } from '../../app';
+import {dispatch} from '../../app';
 
 export const UPDATE_ORDER_CUSTOMER = 'UPDATE_ORDER_CUSTOMER';
 

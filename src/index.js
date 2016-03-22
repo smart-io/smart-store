@@ -1,7 +1,10 @@
-import reduxStore, { initialSate, setStore } from './app';
+import reduxStore, {initialSate, setStore} from './app';
 import reducers from './reducers';
+import * as order from './order/order';
+import * as cart from './cart/cart';
+import * as taxes from './taxes/taxes';
 
-export function store() {
+export function storeEnhancer() {
   return next => (reducer, storeInitialState, enhancer) => {
     function nextReducer() {
       return function (state = {}, action) {
@@ -51,3 +54,8 @@ export function getConfig() {
   return _config;
 }
 
+export default {
+  order,
+  cart,
+  taxes
+};

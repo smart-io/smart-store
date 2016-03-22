@@ -1,10 +1,10 @@
 import * as actions from './cart-actions';
 import * as itemsActions from '../items/items-actions';
 import * as taxesActions from '../taxes/taxes-actions';
-import defaultCart from './cart';
+import {defaultCart} from './cart';
 import items from '../items/items-reducers';
 import taxes from '../taxes/taxes-reducers';
-import { calculateOrderAmounts } from '../accounting/accounting';
+import {calculateOrderAmounts} from '../accounting/accounting';
 
 function resetTaxes(state, taxes) {
   return calculateOrderAmounts({
@@ -14,7 +14,7 @@ function resetTaxes(state, taxes) {
   });
 }
 
-export default function(state = {}, action) {
+export default function (state = {}, action) {
   switch (action.type) {
   case itemsActions.ADD_CART_ITEM:
   case itemsActions.REMOVE_CART_ITEM:

@@ -20,7 +20,7 @@ export const addItem = item => itemsActions.addOrderItem(item);
 export const removeItem = index => itemsActions.removeOrderItem(index);
 export const changeItemQuantity = (index, quantity) => itemsActions.changeOrderItemQuantity(index, quantity);
 
-export default {
+export const defaultOrder = {
   id: null,
   user_id: null,
   order_number: null,
@@ -39,8 +39,8 @@ export default {
 };
 
 //class Order {
-  /*
-   place() {
-   return dispatch(Actions.placeOrder());
-   }*/
+/*
+ place() {
+ return dispatch(Actions.placeOrder());
+ }*/
 //}
