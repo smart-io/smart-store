@@ -5,13 +5,13 @@ class CustomerValidator extends Validator {
   static validate(customer) {
     let errors = {};
 
-    if (!validator.isLength(customer.name, 1)) {
+    if (customer.name === null || !validator.isLength(customer.name, 1)) {
       errors.name = 'name_lenght';
     } else if (!validator.contains(customer.name, ' ')) {
       errors.name = 'name_incomplete';
     }
 
-    if (!validator.isLength(customer.email, 1)) {
+    if (customer.email === null || !validator.isLength(customer.email, 1)) {
       errors.email = 'email_lenght';
     } else if (!validator.isEmail(customer.email)) {
       errors.email = 'email_invalid';

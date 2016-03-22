@@ -16,8 +16,9 @@ class Errors extends Component {
 
     let errors = '';
     for (const error of Object.keys(this.props.errors)) {
-      errors = errors + error;
+      errors = errors + error + ', ';
     }
+    errors = errors.substr(0, errors.length - 2);
 
     let componentStyle = {...styles.message, ...style};
 
