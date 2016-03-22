@@ -47,7 +47,7 @@ export function config(...args) {
   } else {
     config = args[0];
   }
-  _config = { ...config };
+  _config = { ..._config, ...config };
 }
 
 export function getConfig() {
