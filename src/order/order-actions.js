@@ -1,5 +1,5 @@
 import OrderValidator from './order-validator';
-import {dispatch} from '../app';
+import {dispatch, getState} from '../app';
 import Request from '../request';
 
 export const UPDATE_ORDER = 'UPDATE_ORDER';
@@ -25,10 +25,11 @@ export const resetOrderTaxes = taxes => dispatch({ type: RESET_ORDER_TAXES, taxe
 const dispatchValidateOrder = () => dispatch({ type: VALIDATE_ORDER });
 const orderValidated = () => dispatch({ type: ORDER_VALIDATED });
 
-export const validateOrder = order => {
+export const validateOrder = () => {
   dispatchValidateOrder();
 
   return new Promise((resolve, reject) => {
+    let order = getState().order;
     if (OrderValidator.assert(order)) {
       orderValidated();
       resolve();
@@ -40,13 +41,13 @@ export const validateOrder = order => {
   });
 };
 
-export const placeOrder = order => {
+export const placeOrder = () => {
   requestCreateOrder();
 
   return new Request({
     url: '/order',
     method: 'POST',
-    data: order
+    data: getState().order
   })
     .then(function (data) {
       receiveOrder(data);

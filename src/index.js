@@ -1,8 +1,8 @@
-import reduxStore, {initialSate, setStore} from './app';
+import reduxStore, {initialSate, setStore, getState} from './app';
 import reducers from './reducers';
-import * as order from './order/order';
-import * as cart from './cart/cart';
-import * as taxes from './taxes/taxes';
+import * as orderMethods from './order/order';
+import * as cartMethods from './cart/cart';
+import * as taxesMethods from './taxes/taxes';
 
 export function storeEnhancer() {
   return next => (reducer, storeInitialState, enhancer) => {
@@ -54,8 +54,24 @@ export function getConfig() {
   return _config;
 }
 
-export default {
-  order,
-  cart,
-  taxes
-};
+class Store {
+  get order() {
+    let order = getState().order;
+    order.__proto__ = orderMethods;
+    return order;
+  }
+
+  get cart() {
+    let cart = getState().cart;
+    cart.__proto__ = cartMethods;
+    return cart;
+  }
+
+  get taxes() {
+    let taxes = getState().taxes;
+    taxes.__proto__ = taxesMethods;
+    return taxes;
+  }
+}
+
+export default new Store();
