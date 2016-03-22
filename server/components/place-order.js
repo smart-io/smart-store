@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section } from '../../playground/index';
 import * as order from '../../src/order/order';
-import address from '../../src/order/address/address';
-import card from '../../src/order/card/card';
-import customer from '../../src/order/customer/customer';
+import {defaultAddress} from '../../src/order/address/address';
+import {defaultCard} from '../../src/order/card/card';
+import {defaultCustomer} from '../../src/order/customer/customer';
 
 @PlaygroundComponent
 class PlaceOrder extends Component {
@@ -90,25 +90,25 @@ class PlaceOrder extends Component {
         <Section>
           <Section.Form
             name="Customer"
-            defaults={{...customer}}
+            defaults={{...defaultCustomer}}
             state={this.state.order.customer}
             action={(state) => { order.updateCustomer(state) }}
           />
           <Section.Form
             name="Shipping Address"
-            defaults={{...address}}
+            defaults={{...defaultAddress}}
             state={this.state.order.shipping_address}
             action={(state) => { order.updateShippingAddress(state) }}
           />
           <Section.Form
             name="Billing Address"
-            defaults={{...address}}
+            defaults={{...defaultAddress}}
             state={this.state.order.billing_address}
             action={(state) => { order.updateBillingAddress(state) }}
           />
           <Section.Form
             name="Credit Card"
-            defaults={{...card}}
+            defaults={{...defaultCard}}
             state={this.state.order.card}
             action={(state) => { order.updateCard(state) }}
           />

@@ -3,7 +3,7 @@ import * as itemsActions from '../items/items-actions';
 import * as taxesActions from '../taxes/taxes-actions';
 import {defaultCart} from './cart';
 import items from '../items/items-reducers';
-import taxes from '../taxes/taxes-reducers';
+import taxesReducers from '../taxes/taxes-reducers';
 import {calculateOrderAmounts} from '../accounting/accounting';
 
 function resetTaxes(state, taxes) {
@@ -25,14 +25,18 @@ export default function (state = {}, action) {
     return state;
 
   case actions.EMPTY_CART:
+    let taxes = [ ...state.taxes ];
     state = calculateOrderAmounts({ ...defaultCart });
+    for (let i = 0, len = taxes.length; i < len; ++i) {
+      state.taxes.push({ ...taxes[i] });
+    }
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
     return state;
 
   case taxesActions.ADD_TAX:
   case taxesActions.REMOVE_TAX:
   case taxesActions.RESET_TAXES:
-    return resetTaxes(state, taxes(state.taxes, action));
+    return resetTaxes(state, taxesReducers(state.taxes, action));
 
   default:
     return state;

@@ -7,7 +7,7 @@ const DEV = process.env['PROD_DEV'] && process.env['PROD_DEV'] != '0' ? true : f
 module.exports = {
   entry: {
     index: './src/index.js',
-    ...(DEV && { playground: [ 'webpack-hot-middleware/client', './server/playground.js'] })
+    ...(DEV && { playground: [ './server/playground.js'] })
   },
 
   output: {
@@ -40,7 +40,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {

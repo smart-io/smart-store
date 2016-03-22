@@ -13,6 +13,15 @@ try {
 }
 initialSate.order = { ...defaultOrder };
 initialSate.taxes = [];
+if (initialSate.cart.taxes) {
+  for (let i = 0, len = initialSate.cart.taxes.length; i < len; ++i) {
+    let tax = { ...initialSate.cart.taxes[i] };
+    tax.amount = 0;
+    initialSate.order.taxes.push({ ...tax });
+    delete tax.amount;
+    initialSate.taxes.push({ ...tax });
+  }
+}
 
 let store = compose(
   applyMiddleware(thunkMiddleware)

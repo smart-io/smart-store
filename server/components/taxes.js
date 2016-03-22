@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section, Ui } from '../../playground/index';
 import * as taxes from '../../src/taxes/taxes';
-import tax from '../../src/taxes/tax';
+import {defaultTax} from '../../src/taxes/tax';
 
 @PlaygroundComponent
 class Taxes extends Component {
@@ -38,7 +38,7 @@ class Taxes extends Component {
         <Ui.Modal ref="modal">
           <Section.Form
             name="Tax"
-            defaults={{ ...tax }}
+            defaults={{ ...defaultTax }}
             action={this.addTax}
           />
         </Ui.Modal>

@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { PlaygroundComponent, View, Section, Ui } from '../../playground/index';
 import * as cart from '../../src/cart/cart';
-import item from '../../src/items/item';
+import {defaultItem} from '../../src/items/item';
 
 @PlaygroundComponent
 class Cart extends Component {
@@ -17,7 +17,7 @@ class Cart extends Component {
 
   addCartItem = (value) => {
     this.refs.modal.setState({ isOpen: false });
-    cart.addItem({...item, ...value});
+    cart.addItem({...defaultItem, ...value});
   };
 
   removeCartItem = (index) => {
@@ -54,7 +54,7 @@ class Cart extends Component {
         <Ui.Modal ref="modal">
           <Section.Form
             name="Item"
-            defaults={{ ...item }}
+            defaults={{ ...defaultItem }}
             action={this.addCartItem}
           />
         </Ui.Modal>
