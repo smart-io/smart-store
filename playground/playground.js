@@ -7,7 +7,6 @@ document.body.innerHTML = `
 `;
 
 let script = document.createElement('script');
-script.src = '/webpack-dev-server.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 document.body.style.padding = '30px 40px';

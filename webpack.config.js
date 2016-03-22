@@ -6,8 +6,8 @@ const DEV = process.env['PROD_DEV'] && process.env['PROD_DEV'] != '0' ? true : f
 
 module.exports = {
   entry: {
-    index:  ['webpack/hot/dev-server', './src/index.js'],
-    ...(DEV && {playground: ['webpack/hot/dev-server', './server/playground.js']})
+    index: './src/index.js',
+    ...(DEV && { playground: [ 'webpack-hot-middleware/client', './server/playground.js'] })
   },
 
   output: {
@@ -27,26 +27,26 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader'
+        loader: 'eslint'
       }
     ],
     loaders: [
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        loaders: [...(DEV && ['react-hot']), 'babel-loader']
+        loader: 'babel'
       }
     ]
   },
 
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
     }),
-
     ...(DEV && [
       new HtmlWebpackPlugin()
     ])
