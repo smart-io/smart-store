@@ -1,4 +1,4 @@
-import Store from '../index';
+/*import Store from '../index';
 import Request from '../request';
 
 export const REQUEST_FETCH_ORDERS = 'REQUEST_FETCH_ORDERS';
@@ -94,3 +94,4 @@ export function shipOrder(order) {
       });
   }
 }
+*/

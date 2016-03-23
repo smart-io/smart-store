@@ -1,7 +1,7 @@
 {
   "name": "smart-store",
-  "main": "src/index.js",
-  "version": "0.1.12",
+  "main": "lib/index.js",
+  "version": "0.1.15",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "redux": "^3.3.1",
@@ -36,7 +36,8 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha",
     "eslint": "./node_modules/.bin/eslint ./src ./test",
-    "build": "npm run eslint",
+    "prebuild": "npm run eslint",
+    "build": "./node_modules/.bin/babel-node -- ./node_modules/.bin/webpack",
     "prepublish": "npm run build",
     "playground": "PROD_DEV=1 ./node_modules/.bin/babel-node -- ./node_modules/.bin/webpack-dev-server --port 3010 --inline --colors"
   }

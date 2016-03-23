@@ -8,3 +8,6 @@
 /test
 /npm-debug.log
 /webpack.config.js
+/src
+/lib
+!/lib/index.js

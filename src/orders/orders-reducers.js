@@ -1,4 +1,4 @@
-import * as Actions from './orders-actions';
+/*import * as Actions from './orders-actions';
 import Orders from './orders';
 
 export default function order(state = {}, action) {
@@ -15,3 +15,4 @@ export default function order(state = {}, action) {
     return state;
   }
 }
+*/

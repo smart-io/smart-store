@@ -1,4 +1,4 @@
-import {getConfig} from './index';
+import {getConfig} from './config';
 import fetch from 'isomorphic-fetch';
 
 function checkStatus(response) {
