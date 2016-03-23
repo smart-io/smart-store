@@ -33,7 +33,7 @@ export default function (state = [], action) {
     return removeTax(state, action.index);
 
   case taxesActions.RESET_TAXES:
-    return resetTaxes(action.index);
+    return resetTaxes(action.taxes);
 
   default:
     return state;
