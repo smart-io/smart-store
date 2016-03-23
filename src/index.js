@@ -8,11 +8,11 @@ export function storeEnhancer() {
   return next => (reducer, storeInitialState, enhancer) => {
     function nextReducer() {
       return function (state = {}, action) {
-        const { cart, order, orders, taxes, ...storeState } = state;
+        const { cart, order, taxes, ...storeState } = state;
         state = reducer(storeState, action);
         state = {
           ...state,
-          ...reducers({ cart, order, orders, taxes }, action)
+          ...reducers({ cart, order, taxes }, action)
         };
         return state;
       };
