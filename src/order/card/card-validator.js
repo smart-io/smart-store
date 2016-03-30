@@ -7,12 +7,12 @@ class CardValidator extends Validator {
 
     if (card.name === null || !validator.isLength(card.name, 1)) {
       errors.name = 'name_lenght';
-    } else if (!validator.contains(card.name, ' ')) {
-      errors.name = 'name_incomplete';
     }
 
-    if (card.number === null || !validator.isCreditCard(card.number)) {
-      errors.number = 'number';
+    if (card.number === null || !validator.isLength(customer.number, 1)) {
+      errors.number = 'number_length';
+    } else if (!validator.isCreditCard(card.number)) {
+      errors.number = 'number_invalid';
     }
 
     if (card.expiration_month === null || !validator.isNumeric(card.expiration_month) || !validator.isLength(card.expiration_month, 1, 2)) {
