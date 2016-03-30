@@ -15,6 +15,7 @@ class OrderValidator extends Validator {
       errors.billing_address = AddressValidator.validate(order.billing_address);
     }
 
+
     if (!CardValidator.assert(order.card)) {
       errors.card = CardValidator.validate(order.card);
     }

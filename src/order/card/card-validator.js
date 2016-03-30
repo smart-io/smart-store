@@ -9,7 +9,7 @@ class CardValidator extends Validator {
       errors.name = 'name_lenght';
     }
 
-    if (card.number === null || !validator.isLength(customer.number, 1)) {
+    if (card.number === null || !validator.isLength(card.number, 1)) {
       errors.number = 'number_length';
     } else if (!validator.isCreditCard(card.number)) {
       errors.number = 'number_invalid';
