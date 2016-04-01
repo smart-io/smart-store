@@ -10,6 +10,7 @@ import {defaultCard} from './card/card';
 export const update = order => orderActions.updateOrder(order);
 export const validate = () => orderActions.validateOrder();
 export const place = () => orderActions.placeOrder();
+export const reset = () => orderActions.resetOrder();
 export const convertCart = cart => orderActions.convertCartToOrder(cart);
 export const changeCurrency = currency => orderActions.changeCurrency(currency);
 export const updateCustomer = customer => customerActions.updateOrderCustomer(customer);

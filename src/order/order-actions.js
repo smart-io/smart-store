@@ -12,6 +12,7 @@ export const VALIDATE_ORDER = 'VALIDATE_ORDER';
 export const ORDER_VALIDATED = 'ORDER_VALIDATED';
 export const ORDER_EXCEPTIONS = 'ORDER_EXCEPTIONS';
 export const RESET_ORDER_TAXES = 'RESET_ORDER_TAXES';
+export const RESET_ORDER = 'RESET_ORDER';
 
 export const updateOrder = order => dispatch({ type: UPDATE_ORDER, order });
 export const changeCurrency = currency => dispatch({ type: CHANGE_ORDER_CURRENCY, currency });
@@ -21,6 +22,7 @@ export const receiveOrder = order => dispatch({ type: RECEIVE_ORDER, order });
 export const receiveOrderExcpetion = errors => dispatch({ type: RECEIVE_ORDER_EXCEPTION, errors });
 export const orderExceptions = errors => dispatch({ type: ORDER_EXCEPTIONS, errors });
 export const resetOrderTaxes = taxes => dispatch({ type: RESET_ORDER_TAXES, taxes });
+export const resetOrder = () => dispatch({ type: RESET_ORDER });
 
 const dispatchValidateOrder = () => dispatch({ type: VALIDATE_ORDER });
 const orderValidated = () => dispatch({ type: ORDER_VALIDATED });

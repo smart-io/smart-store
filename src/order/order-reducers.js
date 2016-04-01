@@ -37,6 +37,9 @@ export default function order(state = {}, action) {
   case itemsActions.RESET_ORDER_ITEMS:
     return calculateOrderAmounts(items(state, action));
 
+  case actions.RESET_ORDER:
+    return { ...defaultOrder };
+  
   case actions.RECEIVE_ORDER:
   case actions.UPDATE_ORDER:
     return { ...defaultOrder, ...state, ...action.order };
