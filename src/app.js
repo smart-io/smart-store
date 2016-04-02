@@ -32,6 +32,30 @@ let subscribe = store.subscribe;
 
 export default store;
 export {dispatch, getState, subscribe, initialSate};
+
+export function promiseDispatch(action) {
+  return new Promise(resolve => {
+    let unsubscribe = subscribe(() => {
+      unsubscribe();
+      resolve();
+    });
+    dispatch(action);
+  });
+}
+
+export function conclude(obj) {
+  let prop;
+  for (prop in obj) {
+    if (obj.hasOwnProperty(prop)) break;
+  }
+
+  if (prop) {
+    if (obj[prop] === undefined) return getState()[prop];
+    else return obj[prop];
+  }
+  return null;
+}
+
 export function setStore(newStore) {
   store = newStore;
   dispatch = newStore.dispatch;
