@@ -8,6 +8,7 @@ import customer from './customer/customer-reducers';
 import items from '../items/items-reducers';
 import taxes from '../taxes/taxes-reducers';
 import {calculateOrderAmounts} from '../accounting/accounting';
+import * as orderMethods from './order';
 
 function convertCartToOrder(order, cart) {
   return calculateOrderAmounts({
@@ -35,28 +36,33 @@ export default function order(state = {}, action) {
   case itemsActions.CHANGE_ORDER_ITEM_QUANTITY:
   case itemsActions.REMOVE_ORDER_ITEM:
   case itemsActions.RESET_ORDER_ITEMS:
-    return calculateOrderAmounts(items(state, action));
+    state = calculateOrderAmounts(items(state, action));
+    break;
 
   case actions.RESET_ORDER:
-    return { ...defaultOrder };
-  
+    state = { ...defaultOrder };
+    break;
+
   case actions.RECEIVE_ORDER:
   case actions.UPDATE_ORDER:
-    return { ...defaultOrder, ...state, ...action.order };
+    state = { ...defaultOrder, ...state, ...action.order };
+    break;
 
   case actions.CONVERT_CART_TO_ORDER:
     state = convertCartToOrder(state, action.cart);
-    return state;
+    break;
 
   case actions.CHANGE_ORDER_CURRENCY:
-    return { ...defaultOrder, ...state, currency: action.currency };
+    state = { ...defaultOrder, ...state, currency: action.currency };
+    break;
 
   case taxesActions.ADD_TAX:
   case taxesActions.REMOVE_TAX:
   case taxesActions.RESET_TAXES:
-    return resetTaxes(state, taxes(state.taxes, action));
-
-  default:
-    return state;
+    state = resetTaxes(state, taxes(state.taxes, action));
+    break;
   }
+
+  state.__proto__ = orderMethods;
+  return state;
 }

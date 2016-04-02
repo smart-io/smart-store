@@ -5,6 +5,7 @@ import {defaultCart} from './cart';
 import items from '../items/items-reducers';
 import taxesReducers from '../taxes/taxes-reducers';
 import {calculateOrderAmounts} from '../accounting/accounting';
+import * as cartMethods from './cart';
 
 function resetTaxes(state, taxes) {
   return calculateOrderAmounts({
@@ -22,7 +23,7 @@ export default function (state = {}, action) {
   case itemsActions.RESET_CART_ITEMS:
     state = calculateOrderAmounts(items(state, action));
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
-    return state;
+    break;
 
   case actions.EMPTY_CART:
     let taxes = [ ...state.taxes ];
@@ -31,14 +32,15 @@ export default function (state = {}, action) {
       state.taxes.push({ ...taxes[i] });
     }
     if (typeof localStorage !== 'undefined') localStorage['cart'] = JSON.stringify(state);
-    return state;
+    break;
 
   case taxesActions.ADD_TAX:
   case taxesActions.REMOVE_TAX:
   case taxesActions.RESET_TAXES:
-    return resetTaxes(state, taxesReducers(state.taxes, action));
-
-  default:
-    return state;
+    state = resetTaxes(state, taxesReducers(state.taxes, action));
+    break;
   }
+
+  state.__proto__ = cartMethods;
+  return state;
 }

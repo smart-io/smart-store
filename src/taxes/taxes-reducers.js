@@ -1,5 +1,6 @@
 import * as taxesActions from './taxes-actions';
 import {defaultTax} from './tax';
+import * as taxesMethods from './taxes';
 
 function addTax(state, tax) {
   state = [...state, { ...defaultTax, ...tax }];
@@ -27,15 +28,18 @@ function resetTaxes(taxes) {
 export default function (state = [], action) {
   switch (action.type) {
   case taxesActions.ADD_TAX:
-    return addTax(state, action.tax);
+    state = addTax(state, action.tax);
+    break;
 
   case taxesActions.REMOVE_TAX:
-    return removeTax(state, action.index);
+    state = removeTax(state, action.index);
+    break;
 
   case taxesActions.RESET_TAXES:
-    return resetTaxes(action.taxes);
-
-  default:
-    return state;
+    state = resetTaxes(action.taxes);
+    break;
   }
+
+  state.__proto__ = taxesMethods;
+  return state;
 }
