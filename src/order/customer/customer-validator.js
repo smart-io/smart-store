@@ -7,8 +7,6 @@ class CustomerValidator extends Validator {
 
     if (customer.name === null || !validator.isLength(customer.name, 1)) {
       errors.name = 'name_lenght';
-    } else if (!validator.contains(customer.name, ' ')) {
-      errors.name = 'name_incomplete';
     }
 
     if (customer.email === null || !validator.isLength(customer.email, 1)) {

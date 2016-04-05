@@ -7,13 +7,11 @@ import {defaultOrder} from './order/order';
 let initialSate = {};
 try {
   if (localStorage) initialSate.cart = JSON.parse(localStorage['cart']);
-  else initialSate.cart = { ...defaultCart };
-} catch (e) {
-  initialSate.cart = { ...defaultCart };
-}
+} catch (err) {}
+if (!initialSate.cart) initialSate.cart = { ...defaultCart };
 initialSate.order = { ...defaultOrder };
 initialSate.taxes = [];
-if (initialSate.cart.taxes) {
+if (initialSate.cart && initialSate.cart.taxes) {
   for (let i = 0, len = initialSate.cart.taxes.length; i < len; ++i) {
     let tax = { ...initialSate.cart.taxes[i] };
     tax.amount = 0;
